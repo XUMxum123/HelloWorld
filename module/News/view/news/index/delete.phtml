@@ -1,0 +1,15 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+ <p>Are yousure that you want to delete
+    '<?php echo $this->escapeHtml($news->title); ?>' by
+    '<?php echo $this->escapeHtml($news->content); ?>'?
+ </p>
+ <?php
+    $url = $this->url('news',array('action' =>'delete','id' =>$this->id));
+?>
+<form action="<?php echo $url; ?>" method="post">
+ <div>
+   <input type="hidden" name="id" value="<?php echo (string)$news->id; ?>" /><br />
+   <input type="submit" name="del" value="Yes" />
+   <input type="submit" name="del" value="No" />
+ </div>
+</form>
