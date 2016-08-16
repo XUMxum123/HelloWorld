@@ -38,6 +38,7 @@ class IndexController extends AbstractActionController
     	$view->setVariable('paginator', $paginator);
     	$view->setVariable('table', 'myTable');
     	return $view;  */
+    	
     	/*
     	 * another method *
               $paginator = $this->getNewsTalbe()->fetchAll();
