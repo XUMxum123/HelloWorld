@@ -12,6 +12,7 @@ namespace News\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use News\Form\NewsForm;
+use News\Model\NewsModel;
 use News\Model\News;
 
 class IndexController extends AbstractActionController
@@ -22,8 +23,11 @@ class IndexController extends AbstractActionController
     {
     	/* example */
         //echo __METHOD__;
-        $arr = array("name" => "xum","sex" => "男");
-        return new ViewModel($arr);
+        $newsmodel = new NewsModel();
+        $data = $newsmodel->fetchAll('news',$where=null);
+    	var_dump($data);
+        //$arr = array("name" => "xum","sex" => "男");
+        //return new ViewModel();
     }
     
     public function listAction(){  

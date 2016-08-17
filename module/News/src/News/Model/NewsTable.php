@@ -7,7 +7,6 @@ use Zend\Db\Sql\Select;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
-
 class NewsTable {
 	
 	protected $tableGateway;
@@ -17,6 +16,7 @@ class NewsTable {
 	}
 	
 	public function fetchAll($paginated=false){
+		//$tables = new \database('news',$config);
 		if($paginated){
 			$select = new Select('news');
 			$rs = new ResultSet();
