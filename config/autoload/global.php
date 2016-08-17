@@ -27,7 +27,6 @@ return array(
 	),
 );
 
-
 /*  another method to link mysql database
  * 
  *
