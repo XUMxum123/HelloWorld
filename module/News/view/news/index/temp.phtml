@@ -1,0 +1,11 @@
+ <article>
+<table>
+   <?php foreach ($this->posts as $post): ?>
+     <tr>
+        <td><h3 id="post<?= $post->getId() ?>"><?= $post->getId() ?></h3></td>
+        <td><?= $post->getTitle() ?></td>
+        <td><?= $post->getContent() ?></td>
+     </tr>
+   <?php endforeach ?>
+</table>
+ </article>

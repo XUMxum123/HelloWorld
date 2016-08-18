@@ -122,9 +122,15 @@ return array(
         )
     ),
     'service_manager' => array(
-    	'invokables' => array(
+/*     	'invokables' => array(
     		'News\Service\postServiceInterface' => 'News\Service\postService'
-    	),
+    	), */
+        'factories' => array(
+    		'News\Mapper\postMapperInterface'   => 'News\Factory\ZendDbSqlMapperFactory',
+    		'News\Service\postServiceInterface' => 'News\Factory\postServiceFactory',
+    		'Zend\Db\Adapter\Adapter'           => 'Zend\Db\Adapter\AdapterServiceFactory',		
+    )
+    
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,

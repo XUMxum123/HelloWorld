@@ -8,3 +8,36 @@
      </p>
  </article>
  <?php endforeach ?>
+ 
+<div>====================================================================</div>
+<div>========================another method show============================</div>
+<div>====================================================================</div>
+
+<?php
+  $title = 'My';
+  $this->headTitle($title);
+?>
+<table class="table">
+   <caption><?php echo $this->escapeHtml($this->table); ?></caption>
+   <tr>
+       <th>Title</th>
+       <th>Content</th>
+       <th><a href="<?php echo $this->url('news', array('action' => 'add'));?>">Add news</a></th>
+   </tr>
+   <?php foreach ($this->anotherposts as $anotherpost) : ?>
+       <tr>
+           <td><?php echo $this->escapeHtml($anotherpost->getTitle());?></td>
+           <td><?php echo $this->escapeHtml($anotherpost->getContent());?></td>
+           <td>
+               <a href="<?php echo $this->url('news', array('action' =>'edit', 'id' => (string)$anotherpost->getId()));?>">
+                  <?php echo $this->translate("Edit") ?>
+               </a>
+               <a href="<?php echo $this->url('news', array('action' =>'delete', 'id' => (string)$anotherpost->getId()));?>">
+                  <?php echo $this->translate("Delete") ?>
+               </a>
+           </td>
+       </tr>
+   <?php endforeach; ?>
+</table>
+
+
