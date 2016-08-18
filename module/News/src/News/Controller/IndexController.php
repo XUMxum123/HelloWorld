@@ -13,7 +13,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use News\Service\postServiceInterface;
 use News\Form\NewsForm;
-use News\Model\NewsModel;
 use News\Model\News;
 
 class IndexController extends AbstractActionController
@@ -22,11 +21,14 @@ class IndexController extends AbstractActionController
 	
     public function indexAction()
     {
+    	return new ViewModel(array(
+    			'posts' => $this->postService->findAllPosts()
+    	));    	
     	/* example */
         //echo __METHOD__;
-        $newsmodel = new NewsModel();
-        $data = $newsmodel->fetchAll('news',$where=null);
-    	var_dump($data);
+        //$newsmodel = new NewsModel();
+       // $data = $newsmodel->fetchAll('news',$where=null);
+    	//var_dump($data);
         //$arr = array("name" => "xum","sex" => "男");
         //return new ViewModel();
     }
@@ -134,6 +136,9 @@ class IndexController extends AbstractActionController
     	return $this->newsTable;
     }
     
+    /*******************************************************/
+    /*      server manage     */
+    /*******************************************************/
     /**
      * @var \News\Service\postServiceInterface
      */

@@ -1,5 +1,10 @@
-<h1>首页</h1>
+<h1>Services and the ServiceManager example</h1>
 
-<div>
-    <p>how to do it</p>
-</div>
+ <?php foreach ($this->posts as $post): ?>
+ <article>
+     <h3 id="post<?= $post->getId() ?>"><?= $post->getTitle() ?></h3>
+     <p>
+         <?= $post->getContent() ?>
+     </p>
+ </article>
+ <?php endforeach ?>
