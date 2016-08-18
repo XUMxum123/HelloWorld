@@ -69,7 +69,7 @@ class News implements InputFilterAwareInterface {
 									'options'=>array(
 											'encoding'=>'UTF-8',
 											'min'=>3,
-											'max'=>10,
+											'max'=>100,
 									),
 							),
 					),

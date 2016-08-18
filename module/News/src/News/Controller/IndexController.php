@@ -11,6 +11,7 @@ namespace News\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use News\Service\postServiceInterface;
 use News\Form\NewsForm;
 use News\Model\NewsModel;
 use News\Model\News;
@@ -132,6 +133,17 @@ class IndexController extends AbstractActionController
     	}
     	return $this->newsTable;
     }
+    
+    /**
+     * @var \News\Service\postServiceInterface
+     */
+    protected $postService;
+    
+    public function __construct(postServiceInterface $postService)
+    {
+    	$this->postService = $postService;
+    }
+    
     
 /*     public function loginAction()
     {
