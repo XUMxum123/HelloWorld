@@ -51,8 +51,21 @@ Virtual Host
 ------------
 Afterwards, set up a virtual host to point to the public/ directory of the
 project and you should be ready to go!
-=======
+===========================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # HelloWorld
-just to study! thank for you coming!
----xum---
+Hi everybody:
+Just to study! Thanks for you coming!Best wishes for you!
+I will update content as soon as possible!
+---xum---xum---xum---
+***************************************************************************
+Test example
+Assume you virtual host name is www.xum.com
+first example: show you how to use Services and the ServiceManager
+http://www.xum.com/news
+second example: show you how to paginator(paging)
+http://www.xum.com/news/list
+***************************************************************************
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===========================================================================
 >>>>>>> 59bc5aa843b10ed97ac48fa39566967b28c194fc
