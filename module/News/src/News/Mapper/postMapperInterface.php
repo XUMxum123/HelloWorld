@@ -13,9 +13,18 @@ interface postMapperInterface {
 	public function find($id);
 	
 	/**
-	 * @return array|PostInterface[]
+	 * @return array|postInterface[]
 	*/
 	public function findAll();
+	
+	/**
+	 * @param postInterface $postObject
+	 *
+	 * @param postInterface $postObject
+	 * @return postInterface
+	 * @throws \Exception
+	 */
+	public function save(postInterface $postObject);
 	
 }
 

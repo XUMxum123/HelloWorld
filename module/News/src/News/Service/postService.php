@@ -4,38 +4,10 @@ namespace News\Service;
 
 //use News\Model\post;
 use News\Mapper\postMapperInterface;
-
+use News\Model\postInterface;
 
 class postService implements postServiceInterface {
-	
-	protected $data = array(
-			array(
-					'id'    => '1',
-					'title' => 'Hello World #1',
-					'content'  => 'This is our first blog post!'
-			),
-			array(
-					'id'     => '2',
-					'title' => 'Hello World #2',
-					'content'  => 'This is our second blog post!'
-			),
-			array(
-					'id'     => '3',
-					'title' => 'Hello World #3',
-					'content'  => 'This is our third blog post!'
-			),
-			array(
-					'id'     => '4',
-					'title' => 'Hello World #4',
-					'content'  => 'This is our fourth blog post!'
-			),
-			array(
-					'id'     => '5',
-					'title' => 'Hello World #5',
-					'content'  => 'This is our fifth blog post!'
-			)
-	);
-		
+			
 	/**
 	 * @var \News\Mapper\postMapperInterface
 	 */
@@ -82,7 +54,15 @@ class postService implements postServiceInterface {
 		
 		return $model; */
 		
-	}	
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function savePost(postInterface $post)
+	{
+		return $this->postMapper->save($post);
+	}
 }
 
 ?>

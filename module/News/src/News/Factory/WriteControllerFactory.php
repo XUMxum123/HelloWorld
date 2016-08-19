@@ -11,7 +11,7 @@ class WriteControllerFactory implements FactoryInterface {
 	{
 		$realServiceLocator = $serviceLocator->getServiceLocator();
 		$postService        = $realServiceLocator->get('News\Service\postServiceInterface');
-		$postInsertForm     = $realServiceLocator->get('FormElementManager')->get('News\Form\PostForm');
+		$postInsertForm     = $realServiceLocator->get('FormElementManager')->get('News\Form\postForm');
 	
 		return new WriteController(
 				$postService,

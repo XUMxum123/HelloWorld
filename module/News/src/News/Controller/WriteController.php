@@ -23,10 +23,29 @@ use Zend\View\Model\ViewModel;
 
      public function addAction()
      {
-     	return new ViewModel(array(
-     			'form' => $this->postForm
-     	));
-     }
+     $request = $this->getRequest();
+
+         if ($request->isPost()) {
+             $this->postForm->setData($request->getPost());
+
+             if ($this->postForm->isValid()) {
+                 try {
+                 	// \Zend\Debug\Debug::dump($this->postForm->getData());die(); // debug what you post data
+                 	$this->postService->savePost($this->postForm->getData());
+                     return $this->redirect()->toRoute('news',array('action' => 'list'));
+                     //return $this->redirect()->toUrl('/news/list');
+                 } catch (\Exception $e) {
+                 	// Some DB Error happened, log it and let the user know
+                 	throw new \Exception("Could not save data or update data! Please check the result!");
+                 	//echo $e;                     
+                 }
+             }
+         }
+
+         return new ViewModel(array(
+             'form' => $this->postForm
+         ));
+     }    
  }
  
 

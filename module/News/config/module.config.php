@@ -99,7 +99,7 @@ return array(
 			 
 			 /*  add write to write data to database  */
 			 'write' => array(
-			 		'type'    => 'segment',
+			 	'type'    => 'segment',
 			 		'options' => array(
 			 				'route'    => '/write[/:action][/:id][/page/:page]',
 			 				'constraints' => array(

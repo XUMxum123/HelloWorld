@@ -1,13 +1,13 @@
 <h1>WriteController::addAction()</h1>
  <?php
- $form = $this->form;
- $form->setAttribute('action', $this->url());
- $form->prepare();
+   $form = $this->form;
+   $form->setAttribute('action', $this->url());
+   //echo "<div>".$this->url()."</div>";
+   $form->prepare();
 
- echo $this->form()->openTag($form);
-
- echo $this->formCollection($form);
-
- echo $this->form()->closeTag();
+   echo $this->form()->openTag($form);
+   echo $this->formCollection($form);
+   echo $this->form()->closeTag();
+ ?>
  
 
