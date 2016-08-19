@@ -33,7 +33,7 @@ class ZendDbSqlMapper implements postMapperInterface{
      public function __construct(
          AdapterInterface $dbAdapter,
          HydratorInterface $hydrator,
-         PostInterface $postPrototype
+         postInterface $postPrototype
      ) {
          $this->dbAdapter      = $dbAdapter;
          $this->hydrator       = $hydrator;
@@ -50,7 +50,8 @@ class ZendDbSqlMapper implements postMapperInterface{
 	{
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select('news'); // news is table name
-		$select->where(array('id = ?' => $id));
+		$where = array('id = ?' => $id);
+		$select->where($where);
 		
 		$stmt   = $sql->prepareStatementForSqlObject($select);
 		$result = $stmt->execute();

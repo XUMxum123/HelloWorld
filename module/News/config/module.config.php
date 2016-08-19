@@ -96,6 +96,24 @@ return array(
 							 ),
 					 ),
 			 ),
+			 
+			 /*  add write to write data to database  */
+			 'write' => array(
+			 		'type'    => 'segment',
+			 		'options' => array(
+			 				'route'    => '/write[/:action][/:id][/page/:page]',
+			 				'constraints' => array(
+			 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+			 						'id'     => '[a-zA-Z0-9_-]*[a-zA-Z0-9_-]*',  // first letter / second letter
+			 						'page'   => '[0-9]+',
+			 				),
+			 				'defaults' => array(
+			 						'controller' => 'News\Controller\Write',
+			 						'action'     => 'add',
+			 				),
+			 		),
+			 ),
+			 
 		),
     ),
     'service_manager' => array(
@@ -118,7 +136,8 @@ return array(
             'News\Controller\Index' => 'News\Controller\IndexController',
         ), */
         'factories' => array(
-        	'News\Controller\Index' => 'News\Factory\IndexControllerFactory'
+        	'News\Controller\Index' => 'News\Factory\IndexControllerFactory',
+        	'News\Controller\Write' => 'News\Factory\WriteControllerFactory',
         )
     ),
     'service_manager' => array(
