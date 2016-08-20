@@ -29,7 +29,7 @@ return array(
         // If enabled, the merged configuration will be cached and used in
         // subsequent requests.
         //'config_cache_enabled' => $booleanValue,
-    		'config_cache_enabled' => false,  // add myself xum
+    		//'config_cache_enabled' => false,  // add myself xum
 
         // The key used to create the configuration cache file name.
         //'config_cache_key' => $stringKey,
