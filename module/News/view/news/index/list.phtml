@@ -5,19 +5,22 @@
 <table class="table">
    <caption><?php echo $this->escapeHtml($this->table); ?></caption>
    <tr>
-       <th>Title</th>
-       <th>Content</th>
-       <th><a href="<?php echo $this->url('news', array('action' => 'add'));?>">Add news</a></th>
+       <th>Titles</th>
+       <th>Contentsxyz</th>
+       <!-- <th><a href="<?php //echo $this->url('news', array('action' => 'add'));?>">Add news</a></th> --> <!-- use tableGateway to add news -->
+       <th><a href="<?php echo $this->url('write', array('action' => 'add'));?>">Add news</a></th> <!-- use service manager to add news -->
    </tr>
    <?php foreach ($paginator as $news) : ?>
        <tr>
            <td><?php echo $this->escapeHtml($news->title);?></td>
            <td><?php echo $this->escapeHtml($news->content);?></td>
            <td>
-               <a href="<?php echo $this->url('news', array('action' =>'edit', 'id' => (string)$news->id));?>">
+               <!--  <a href="<?php //echo $this->url('news', array('action' =>'edit', 'id' => (string)$news->id));?>"> --> <!-- use tableGateway to add news -->
+               <a href="<?php echo $this->url('write', array('action' =>'edit', 'id' => (string)$news->id));?>"> <!-- use service manager to edit news -->
                   <?php echo $this->translate("Edit") ?>
                </a>
-               <a href="<?php echo $this->url('news', array('action' =>'delete', 'id' => (string)$news->id));?>">
+               <!-- <a href="<?php //echo $this->url('news', array('action' =>'delete', 'id' => (string)$news->id));?>">--> <!-- use tableGateway to add news -->
+               <a href="<?php echo $this->url('delete', array('action' =>'delete', 'id' => (string)$news->id));?>"> <!-- use service manager to delete news -->
                   <?php echo $this->translate("Delete") ?>
                </a>
            </td>

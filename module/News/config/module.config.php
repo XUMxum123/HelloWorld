@@ -73,7 +73,7 @@ $news["child_routes"]["edit"] = $news_edit;
 $news["child_routes"]["delete"] = $news_delete;
 $news["child_routes"]["add"] = $news_add; */
 
-return array(		
+return array(
 /* 	'router' => array(
 		'routes' => array(
 		  'news' => $news,
@@ -96,8 +96,8 @@ return array(
 							 ),
 					 ),
 			 ),
-			 
-			 /*  add write to write data to database  */
+
+			 /*  sava or update data to database  */
 			 'write' => array(
 			 	'type'    => 'segment',
 			 		'options' => array(
@@ -113,7 +113,27 @@ return array(
 			 				),
 			 		),
 			 ),
-			 
+
+			 /*  deletes data to database  */
+			 // note: 1. maybe not be name like delete, because the route of news have a action name is delete,
+			 //       2. if name delete, as a action to matching the route news of action, rather than treat as a route array name
+			 //       3. the internal of db_delete(database delete) route name is delete or other name
+			 'delete' => array(
+			 		'type'    => 'segment',
+			 		'options' => array(
+			 				'route'    => '/delete[/:action][/:id][/page/:page]',
+			 				'constraints' => array(
+			 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+			 						'id'     => '[a-zA-Z0-9_-]*[a-zA-Z0-9_-]*',  // first letter / second letter
+			 						'page'   => '[0-9]+',
+			 				),
+			 				'defaults' => array(
+			 						'controller' => 'News\Controller\Delete',
+			 						//'action'     => 'delete',  // think it why not set action name id delete
+			 				),
+			 		),
+			 ),
+
 		),
     ),
     'service_manager' => array(
@@ -138,6 +158,7 @@ return array(
         'factories' => array(
         	'News\Controller\Index' => 'News\Factory\IndexControllerFactory',
         	'News\Controller\Write' => 'News\Factory\WriteControllerFactory',
+        	'News\Controller\Delete' => 'News\Factory\DeleteControllerFactory',
         )
     ),
     'service_manager' => array(
@@ -147,9 +168,9 @@ return array(
         'factories' => array(
     		'News\Mapper\postMapperInterface'   => 'News\Factory\ZendDbSqlMapperFactory',
     		'News\Service\postServiceInterface' => 'News\Factory\postServiceFactory',
-    		'Zend\Db\Adapter\Adapter'           => 'Zend\Db\Adapter\AdapterServiceFactory',		
+    		'Zend\Db\Adapter\Adapter'           => 'Zend\Db\Adapter\AdapterServiceFactory',
     )
-    
+
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
@@ -224,7 +245,7 @@ return array(
  				),
  				'may_terminate' => true,
  		), */
- 
+
  		/*            'register' => array(
  		 'type'    => 'Literal',
  				'options' => array(

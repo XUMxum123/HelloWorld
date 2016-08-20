@@ -1,0 +1,10 @@
+<?php
+   $form = $this->form;
+   $form->setAttribute('action', $this->url('write',array('action'=>'edit'), true));
+   $form->prepare();
+   //echo "<div>".$this->url()."</div>";
+
+   echo $this->form()->openTag($form);
+   echo $this->formCollection($form);
+   echo $this->form()->closeTag();
+?>

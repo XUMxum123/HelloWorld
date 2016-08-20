@@ -4,7 +4,12 @@
     '<?php echo $this->escapeHtml($news->content); ?>'?
  </p>
  <?php
-    $url = $this->url('news',array('action' =>'delete','id' =>$this->id));
+    //$url = $this->url('news',array('action' =>'delete','id' =>$this->id));
+    $url = $this->url('write', array('action'=>'delete','id'=>$this->id), true);
+
+    echo "start test it by xum"."<br/>";
+    echo $url."<br/>";
+    echo "end test it by xum"."<br/>";
 ?>
 <form action="<?php echo $url; ?>" method="post">
  <div>

@@ -2,6 +2,8 @@
 <?php
    $form =$this->form;  // 接收到控制器传递过来的表单对象
    $form->setAttribute('action',$this->url('news',array('action'=>'add')));//设置表单的action属性
+   //$form->setAttribute('action', $this->url('write',array('action'=>'add'), true));//设置表单的action属性
+
    echo $this->form()->openTag($form);// 打开form表单
    echo $this->formCollection($this->form);// 输出表单里的元素集合
    echo $this->form()->closeTag();// 闭合form表单

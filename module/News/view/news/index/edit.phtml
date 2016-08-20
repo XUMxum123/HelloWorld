@@ -1,7 +1,8 @@
 <?php
    $form =$this->form;
    $form->setAttribute('action',$this->url('news',array('action'=>'edit','id'=>$this->id)));// 设置表单的action 属性
+   //$form->setAttribute('action',$this->url('write',array('action'=>'edit'),true));// 设置表单的action 属性
    echo $this->form()->openTag($form);// 打开form 表单
    echo $this->formCollection($this->form);// 生成表单元素
    echo $this->form()->closeTag();// 关闭表单
-?>   
+?>

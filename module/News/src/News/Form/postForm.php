@@ -6,7 +6,7 @@ use Zend\Form\Form;
 
 class postForm extends Form {
     public function __construct($name = null, $options = array()){
-    	
+
          parent::__construct($name, $options);
 
          $this->add(array(
@@ -16,7 +16,7 @@ class postForm extends Form {
          		 'use_as_base_fieldset' => true
          	  )
          ));
-         
+
          // <input type="submit" name="submit" value="Insert new Post" />
          $this->add(array(
              'type' => 'submit',
@@ -25,7 +25,7 @@ class postForm extends Form {
                  'value' => 'Insert new Post'
              )
          ));
-     }		
+     }
 }
 
 ?>

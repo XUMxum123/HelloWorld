@@ -18,13 +18,13 @@ use News\Model\News;
 class IndexController extends AbstractActionController
 {
 	protected $newsTable;
-	
+
     public function indexAction()
     {
     	return new ViewModel(array(
     			'posts' => $this->postService->findAllPosts(),
     			'anotherposts' => $this->postService->findAllPosts()
-    	));    	
+    	));
     	/* example */
         //echo __METHOD__;
         //$newsmodel = new NewsModel();
@@ -33,20 +33,20 @@ class IndexController extends AbstractActionController
         //$arr = array("name" => "xum","sex" => "男");
         //return new ViewModel();
     }
-    
-    public function listAction(){  
+
+    public function listAction(){
     	$paginator = $this->getNewsTable()->fetchAll(true);
     	$paginator->setCurrentPageNumber((int)$this->params()->fromRoute('page',1));
     	$paginator->setItemCountPerPage(4);
-    	return new ViewModel(array('paginator'=>$paginator));   
-    		
+    	return new ViewModel(array('paginator'=>$paginator));
+
 /*      $paginator = $this->getNewsTable()->fetchAll();
     	$view = new ViewModel();
     	$view->setTemplate('news/index/list.phtml');
     	$view->setVariable('paginator', $paginator);
     	$view->setVariable('table', 'myTable');
     	return $view;  */
-    	
+
     	/*
     	 * another method *
               $paginator = $this->getNewsTalbe()->fetchAll();
@@ -55,14 +55,14 @@ class IndexController extends AbstractActionController
     	//var_dump($paginator);
     	//exit;
     }
-    
+
     public function paginatorAction(){
     	$paginator = $this->getNewsTable()->fetchAll(true);
     	$paginator->setCurrentPageNumber((int)$this->params()->fromRoute('page',1));
     	$paginator->setItemCountPerPage(5);
-        return new ViewModel(array('paginator'=>$paginator)); 	 
+        return new ViewModel(array('paginator'=>$paginator));
     }
-    
+
     public function addAction(){
     	$form = new NewsForm('news');
     	$form->get('submit')->setValue('Add');
@@ -74,14 +74,14 @@ class IndexController extends AbstractActionController
      		if($form->isValid()){
     			$news->exchangeArray($form->getData());
     			$this->getNewsTable()->saveNews($news);
-    			//也可以使用URL 
+    			//也可以使用URL
     			//return $this->redirect()->toUrl('/news/list');
     			return $this->redirect()->toRoute('news',array('action' => 'list'));
     		}
-    	} 
-    	return array('form'=>$form);   	
+    	}
+    	return array('form'=>$form);
     }
-    
+
     public function editAction(){
     	$id = (string) $this->params()->fromRoute('id',0);
     	if(!$id){
@@ -104,9 +104,9 @@ class IndexController extends AbstractActionController
     			$this->redirect()->toUrl('/news/list');
     		}
     	}
-    	return array('id'=>$id,'form'=>$form);  	
+    	return array('id'=>$id,'form'=>$form);
     }
-    
+
     public function deleteAction(){
     	$id = (string) $this->params()->fromRoute('id',0);
     	if(!$id){
@@ -115,7 +115,7 @@ class IndexController extends AbstractActionController
     	$request = $this->getRequest();
     	if($request->isPost()){
     		// acquire input name='del' value, dedfault id No
-    		$del = $request->getPost('del','No'); 
+    		$del = $request->getPost('del','No');
     		if($del=='Yes'){
     			$id = (string)$request->getPost('id');
     			$this->getNewsTable()->deleteNewsWithId($id);
@@ -125,9 +125,9 @@ class IndexController extends AbstractActionController
     	return array('id' => $id,
     			   'news' => $this->getNewsTable()->getNewsInfoWithId($id),
     			   'title' => 'delete title'
-    	);    	
+    	);
     }
-    
+
     public function getNewsTable(){
     	$register_name = 'News\Model\NewsTable';
     	if(!$this->newsTable){
@@ -136,7 +136,7 @@ class IndexController extends AbstractActionController
     	}
     	return $this->newsTable;
     }
-    
+
     /*******************************************************/
     /*      server manage     */
     /*******************************************************/
@@ -144,25 +144,25 @@ class IndexController extends AbstractActionController
      * @var \News\Service\postServiceInterface
      */
     protected $postService;
-    
+
     public function __construct(postServiceInterface $postService)
     {
     	$this->postService = $postService;
     }
-    
-    
+
+
 /*     public function loginAction()
     {
     	echo __METHOD__;
-    	exit; 
+    	exit;
     }
-    
+
     public function registerAction()
     {
     	echo __METHOD__;
     	exit;
     }
-    
+
     public function xumAction()
     {
     	echo __METHOD__;
