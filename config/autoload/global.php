@@ -28,7 +28,7 @@ return array(
 );
 
 /*  another method to link mysql database
- * 
+ *
  *
        'db' => array(
         'driver'         => 'MYSQLI',
@@ -44,6 +44,6 @@ return array(
             => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
-     
- * 
+
+ *
  * */
