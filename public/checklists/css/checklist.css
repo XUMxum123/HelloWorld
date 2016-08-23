@@ -1,0 +1,12 @@
+/**
+ * checklist.css
+ *
+ * @author meng.xu
+ * @time 2016.08.20
+ *
+ */
+
+@CHARSET "UTF-8";
+
+table.table td, table.table th {text-align: center;}
+h1 {text-align: center;}
