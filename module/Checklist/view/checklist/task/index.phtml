@@ -1,0 +1,32 @@
+<?php
+ $title = 'My task list';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+
+ <table class="table">
+ <tr>
+     <th>Title</th>
+     <th>Content</th>
+     <th>LoadCompleted?</th>
+     <th> <p><a href="<?php echo $this->url('task', array(
+         'action'=>'add'));?>">Add new item</a></p></th>
+ </tr>
+ <?php foreach ($tasks as $task): ?>
+ <tr>
+     <td>
+         <a href="<?php echo $this->url('task',
+             array('action'=>'edit', 'id' => $task->getId()));?>">
+             <?php echo $this->escapeHtml($task->getTitle()); ?></a>
+     </td>
+     <td><?php echo $this->escapeHtml($task->getContent()); ?></td>
+     <td><?php echo $task->getContent() ? 'Yes' : 'No'; ?></td>
+     <td>
+         <a href="<?php echo $this->url('task',
+             array('action'=>'delete', 'id' => $task->getId()));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
