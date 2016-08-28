@@ -11,7 +11,7 @@ namespace Checklist;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Checklist\Mapper\TaskMapper;
+use Checklist\Mapper\TableMapper;
 
 
 /**
@@ -48,16 +48,17 @@ class Module
      * Fixed function name--not change--- gerServiceConfig
      *
      * */
-     public function getServiceConfig()
+/*       public function getServiceConfig()
      {
          return array(
              'factories' => array(
-                 'TaskMapper' => function ($sm) {
+                 'TableMapper' => function ($sm) {
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                     $mapper = new TaskMapper($dbAdapter);
+                     $mapper = new TableMapper($dbAdapter,null);
                      return $mapper;
                  }
              ),
          );
-     }
+     } */
+
 }
