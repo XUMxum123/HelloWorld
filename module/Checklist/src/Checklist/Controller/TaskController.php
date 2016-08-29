@@ -25,11 +25,11 @@ class TaskController extends AbstractActionController {
 		// TODO Auto-generated ChecklistController::indexAction() default action
 
 		$function_name = "uuid";
-		$parameter = array(
-            "xyz",  "xum"
-		);
-		$result = $this->getCommonFunction($function_name,$parameter);
-        //var_dump($my);//die();
+		$prefix = "xum";
+		$sub = "xyz";
+		$uuid_function = $this->getCommonFunction($function_name);
+        $result = $uuid_function($prefix,$sub);
+        //var_dump($config = $this->getServiceLocator()->get('Config'));die();
 		$mapper = $this->getTableMapper('news');
 		return new ViewModel (array('tasks' => $mapper->fetchAll(),'my'=>$result));
 	}
@@ -115,20 +115,11 @@ class TaskController extends AbstractActionController {
 	}
 
 
-	public function getCommonFunction($function_name,$parameter=null)
+	public function getCommonFunction($functionName)
 	{
-		$para = ",";
-		if($parameter != null){
-           foreach($parameter as $key=>$value){
-           	//print_r($key."}".$value);
-                $para = $para."'".$value."'".",";
-           }
-           $para = trim($para,",");
-		}
-		print_r($para);
 		$config = $this->getServiceLocator()->get('Config');
-		$result = $config['common_function']['function'][$function_name]('xum','xyz');
-		return $result;
+		$function = $config['common_function']['function'][$functionName];
+		return $function;
 	}
 
 	/**
