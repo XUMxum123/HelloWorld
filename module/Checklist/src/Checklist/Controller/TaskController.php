@@ -114,7 +114,16 @@ class TaskController extends AbstractActionController {
 		//return new ViewModel ();
 	}
 
+	/*
+	 * add xumadd method, in order to study multi-table operate
+	 * */
+	public function xumaddAction(){
 
+	}
+
+    /*
+     * maybe not used in future
+     * */
 	public function getCommonFunction($functionName)
 	{
 		$config = $this->getServiceLocator()->get('Config');
