@@ -23,7 +23,11 @@
     var $sex = $("select.sex option:selected").val();  // var $sex = $('select.sex option:selected').text();
     var $country = $("select[name='country'] option[selected]").val(); // var $country = $("select[name='country'] option[selected]").text();
     var $nbateam = $("select.nbateam").find("option:selected").val(); //var $nbateam = $("select.nbateam").find("option:selected").text();
-     $.ajax({
+    var $url = "xumadd?title=" + $title + "&content=" + $content;
+        $url += "&name=" + $name + "&sex=" + $sex;
+        $url += "&country=" + $country + "&nbateam=" + $nbateam;
+    window.location.href = $url;
+/*     $.ajax({
         	type: "POST",
         	 url: "xumadd",
         	data: {
@@ -35,9 +39,9 @@
                "nbateam": $nbateam
         	},
         success: function(){
-            alert("123");
+            //alert("123");
          }
-        });
+        });*/
     });
  });
 
