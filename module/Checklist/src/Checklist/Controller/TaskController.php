@@ -125,19 +125,34 @@ class TaskController extends AbstractActionController {
 		$view->setVariable('nbateamInfo', $nbateamInfo);
 		$sexInfo = array("boy","girl");
 		$countryInfo = array("America","China","France","German");
+		$init_sex = "boy";
 		$view->setVariable('sexInfo', $sexInfo);
+		$view->setVariable('init_sex', $init_sex);
+		$init_country = "China";
 		$view->setVariable('countryInfo', $countryInfo);
+		$view->setVariable('init_country', $init_country);
+		$init_nbateam = "骑士";
+		$view->setVariable('init_nbateam', $init_nbateam);
 		$view->setTemplate('checklist/task/xumindex.phtml');
 		return $view;
 	}
 
 	public function xumaddAction(){
-		$title = $this->params('title');
-		$content = $this->params('content');
-		$name = $this->params('name');
-		$sex = $this->params('sex');
-		$country = $this->params('country');
-		$nbateam = $this->params('nbateam');
+		$view = new ViewModel();
+		$params['title'] = $this->params('title');
+		$params['content'] = $this->params('content');
+		$params['name'] = $this->params('name');
+		$params['sex'] = $this->params('sex');
+		$params['country'] = $this->params('country');
+		$params['nbateam'] = $this->params('nbateam');
+		//$arr = $this->getRequest()->getPost();
+		//$arr =  $this->params('title');
+		$request = $this->getRequest();
+		//$view->setVariable('params', $params);
+		//var_dump($request);
+		print_r($request);
+		//$view->setVariable('title', $this->params('title'));
+		//return $view;
 	}
 
     /*

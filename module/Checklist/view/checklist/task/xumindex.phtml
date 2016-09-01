@@ -5,21 +5,39 @@
 你的名字: <input type="text" name="name" class="name" value="" /><br />
 你的性别: <select class="sex">
            <?php foreach ($this->sexInfo as $sex) : ?>
-            <option value="<?php echo $sex; ?>">
+            <option value="<?php echo $sex; ?>"
+               <?php
+                 if($this->init_sex == $sex){
+                    echo "selected=\"selected\"";
+                  }
+               ?>
+            >
               <?php echo $this->escapeHtml($sex); ?>
             </option>
            <?php endforeach; ?>
          </select><br />
 你的国家: <select name="country" class="country">
            <?php foreach ($this->countryInfo as $country) : ?>
-            <option value="<?php echo $country; ?>">
+            <option value="<?php echo $country; ?>"
+              <?php
+                 if($this->init_country == $country){
+                    echo "selected=\"selected\"";
+                  }
+               ?>
+            >
               <?php echo $this->escapeHtml($country); ?>
             </option>
            <?php endforeach; ?>
          </select><br />
 喜欢球队: <select name="nbateam" class="nbateam">
            <?php foreach ($this->nbateamInfo as $nbateam) : ?>
-            <option value="<?php echo $this->escapeHtml($nbateam->getId()); ?>">
+            <option value="<?php echo $this->escapeHtml($nbateam->getId()); ?>"
+              <?php
+                 if($this->init_nbateam == $nbateam->getName()){
+                    echo "selected=\"selected\"";
+                  }
+               ?>
+            >
               <?php echo $this->escapeHtml($nbateam->getName()); ?>
             </option>
            <?php endforeach; ?>
