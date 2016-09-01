@@ -11,9 +11,8 @@ namespace Checklist\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Checklist\Model\TaskEntity;
+use Checklist\Model\NewsEntity;
 use Checklist\Form\TaskForm;
-use Checklist\Mapper\TableMapper;
 
 //require_once '/common/function.php';
 
@@ -24,14 +23,14 @@ class TaskController extends AbstractActionController {
 	public function indexAction() {
 		// TODO Auto-generated ChecklistController::indexAction() default action
 
-		$function_name = "uuid";
+/* 		$function_name = "uuid";
 		$prefix = "xum";
 		$sub = "xyz";
 		$uuid_function = $this->getCommonFunction($function_name);
-        $result = $uuid_function($prefix,$sub);
+        $result = $uuid_function($prefix,$sub); 'my'=>$result */
         //var_dump($config = $this->getServiceLocator()->get('Config'));die();
-		$mapper = $this->getTableMapper('news');
-		return new ViewModel (array('tasks' => $mapper->fetchAll(),'my'=>$result));
+		$newsTableMapper = $this->getServiceLocator()->get('newsTableMapper');
+		return new ViewModel (array('tasks' => $newsTableMapper->fetchAll()));
 	}
 
 	/**
@@ -39,14 +38,14 @@ class TaskController extends AbstractActionController {
 	 */
 	public function addAction(){
 		$form = new TaskForm();
-		$task = new TaskEntity();
+		$task = new NewsEntity();
 		$form->bind($task);
 
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			$form->setData($request->getPost());
 			if ($form->isValid()) {
-				$this->getTableMapper('news')->saveTask($task);
+				$this->getTableMapper('newsTableMapper')->saveTask($task);
 
 				// Redirect to list of tasks
 				// return $this->redirect()->toUrl('/checklist/index');
@@ -66,7 +65,7 @@ class TaskController extends AbstractActionController {
 		if (!$id) {
 			return $this->redirect()->toRoute('task');
 		}
-		$task = $this->getTableMapper('news')->getTask($id);
+		$task = $this->getTableMapper('newsTableMapper')->getTask($id);
 
 		$form = new TaskForm();
 		$form->bind($task);
@@ -75,7 +74,7 @@ class TaskController extends AbstractActionController {
 		if ($request->isPost()) {
 			$form->setData($request->getPost());
 			if ($form->isValid()) {
-				$this->getTableMapper('news')->saveTask($task);
+				$this->getTableMapper('newsTableMapper')->saveTask($task);
 
 				return $this->redirect()->toRoute('task');
 			}
@@ -93,7 +92,7 @@ class TaskController extends AbstractActionController {
 	 */
 	public function deleteAction(){
 		$id = $this->params('id');
-		$task = $this->getTableMapper('news')->getTask($id);
+		$task = $this->getTableMapper('newsTableMapper')->getTask($id);
 		if (!$task) {
 			return $this->redirect()->toRoute('task');
 		}
@@ -101,7 +100,7 @@ class TaskController extends AbstractActionController {
 		$request = $this->getRequest();
 		if ($request->isPost()) {
 			if ($request->getPost()->get('del') == 'Yes') {
-				$this->getTableMapper('news')->deleteTask($id);
+				$this->getTableMapper('newsTableMapper')->deleteTask($id);
 			}
 
 			return $this->redirect()->toRoute('task');
@@ -115,32 +114,57 @@ class TaskController extends AbstractActionController {
 	}
 
 	/*
-	 * add xumadd method, in order to study multi-table operate
+	 * add xumindex and xumadd method, in order to study multi-table operate
 	 * */
-	public function xumaddAction(){
+	public function xumindexAction(){
+		$view = new ViewModel();
+		$nbateamTableMapper = $this->getTableMapper('nbateamTableMapper');
+		$nbateamInfo = $nbateamTableMapper->fetchAll();
+		//var_dump($nbateamInfo);
+		//die();
+		$view->setVariable('nbateamInfo', $nbateamInfo);
+		$sexInfo = array("boy","girl");
+		$countryInfo = array("America","China","France","German");
+		$view->setVariable('sexInfo', $sexInfo);
+		$view->setVariable('countryInfo', $countryInfo);
+		$view->setTemplate('checklist/task/xumindex.phtml');
+		return $view;
+	}
 
+	public function xumaddAction(){
+		$title = $this->params('title');
+		$content = $this->params('content');
+		$name = $this->params('name');
+		$sex = $this->params('sex');
+		$country = $this->params('country');
+		$nbateam = $this->params('nbateam');
 	}
 
     /*
      * maybe not used in future
      * */
-	public function getCommonFunction($functionName)
+/* 	public function getCommonFunction($functionName)
 	{
 		$config = $this->getServiceLocator()->get('Config');
 		$function = $config['common_function']['function'][$functionName];
 		return $function;
-	}
+	} */
 
 	/**
-	 * We can now call getTaskMapper() from within our controller whenever we need to interact with our model layer
-	 * example: $mapper = $this->getTableMapper($tableName);
+	 * We can now call getNewsTableMapper() from within our controller whenever we need to interact with our model layer
+	 * example: $mapper = $this->getNewsTableMapper($tableName);
 	 */
-	public function getTableMapper($tableName)
+
+	public function getTableMapper($tableTableMapper){
+        return $this->getServiceLocator()->get($tableTableMapper);
+	}
+
+/* 	public function getNewsTableMapper($tableName)
 	{
 		$sm = $this->getServiceLocator();
 		$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 		$mapper = new TableMapper($dbAdapter,$tableName);
 		return $mapper;
 		//return $sm->get('TableMapper');
-	}
+	} */
 }

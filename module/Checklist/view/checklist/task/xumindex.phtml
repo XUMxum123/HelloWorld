@@ -1,0 +1,28 @@
+<h1>xumadd method</h1>
+<div id="main_content">
+新闻标题: <input type="text" name="title" class="title" value="" /><br />
+新闻内容: <input type="text" name="content" class="content" value="" /><br />
+你的名字: <input type="text" name="name" class="name" value="" /><br />
+你的性别: <select class="sex">
+           <?php foreach ($this->sexInfo as $sex) : ?>
+            <option value="<?php echo $sex; ?>">
+              <?php echo $this->escapeHtml($sex); ?>
+            </option>
+           <?php endforeach; ?>
+         </select><br />
+你的国家: <select name="country" class="country">
+           <?php foreach ($this->countryInfo as $country) : ?>
+            <option value="<?php echo $country; ?>">
+              <?php echo $this->escapeHtml($country); ?>
+            </option>
+           <?php endforeach; ?>
+         </select><br />
+喜欢球队: <select name="nbateam" class="nbateam">
+           <?php foreach ($this->nbateamInfo as $nbateam) : ?>
+            <option value="<?php echo $this->escapeHtml($nbateam->getId()); ?>">
+              <?php echo $this->escapeHtml($nbateam->getName()); ?>
+            </option>
+           <?php endforeach; ?>
+         </select><br />
+<button class="submit">提交</button>
+</div>

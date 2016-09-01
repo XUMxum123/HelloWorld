@@ -11,8 +11,9 @@ namespace Checklist;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Checklist\Mapper\TableMapper;
-
+use Checklist\Mapper\NewsTableMapper;
+use Checklist\Mapper\NbateamTableMapper;
+use Checklist\Mapper\UsersTableMapper;
 
 /**
  * @author meng.xu
@@ -48,17 +49,27 @@ class Module
      * Fixed function name--not change--- gerServiceConfig
      *
      * */
-/*       public function getServiceConfig()
+     public function getServiceConfig()
      {
          return array(
              'factories' => array(
-                 'TableMapper' => function ($sm) {
+                 'newsTableMapper' => function ($sm) {
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                     $mapper = new TableMapper($dbAdapter,null);
+                     $mapper = new NewsTableMapper($dbAdapter,"news");
                      return $mapper;
-                 }
+                 },
+                 'nbateamTableMapper' => function ($sm) {
+                 	$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                 	$mapper = new NbateamTableMapper($dbAdapter,"nbateam");
+                 	return $mapper;
+                 },
+                 'usersTableMapper' => function ($sm) {
+                 	$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                 	$mapper = new UsersTableMapper($dbAdapter,"users");
+                 	return $mapper;
+                 },
              ),
          );
-     } */
+     }
 
 }
