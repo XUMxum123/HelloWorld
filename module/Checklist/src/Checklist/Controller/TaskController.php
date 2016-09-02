@@ -113,6 +113,16 @@ class TaskController extends AbstractActionController {
 		//return new ViewModel ();
 	}
 
+	function uuid($prefix = ''){
+		$chars = md5(uniqid(mt_rand(), true));
+		$uuid  = substr($chars,0,8);
+		$uuid .= substr($chars,8,4);
+		$uuid .= substr($chars,12,4);
+		$uuid .= substr($chars,16,4);
+		$uuid .= substr($chars,20,12);
+		return $prefix.$uuid;
+	}
+
 	/*
 	 * add xumindex and xumadd method, in order to study multi-table operate
 	 * */
@@ -139,20 +149,58 @@ class TaskController extends AbstractActionController {
 
 	public function xumaddAction(){
 		$view = new ViewModel();
-		$params['title'] = $this->params('title');
-		$params['content'] = $this->params('content');
-		$params['name'] = $this->params('name');
-		$params['sex'] = $this->params('sex');
-		$params['country'] = $this->params('country');
-		$params['nbateam'] = $this->params('nbateam');
+		$request = $this->getRequest();
+		$params = $request->getQuery(); /* 取得所有值  */
+
+		$newsTableMapper = $this->getTableMapper('newsTableMapper');
+		$newsId = $this->uuid();
+        $newsData['id'] = $newsId;
+        $newsData['title'] = $request->getQuery('title','default value');
+        $newsData['content'] = $request->getQuery('content','default value');
+        $newsTableMapper->xumsaveNews($newsData);
+
+        $usersTableMapper = $this->getTableMapper('usersTableMapper');
+        $usersId = $this->uuid();
+        $usersData['id'] = $usersId;
+        $usersData['newsid'] = $newsId;
+        $usersData['nbateamid'] = $request->getQuery('nbateamid','default value');
+        $usersData['name'] = $request->getQuery('name','default value');
+        $usersData['sex'] = $request->getQuery('sex','default value');
+        $usersData['country'] = $request->getQuery('country','default value');
+        $usersTableMapper->xumsaveuUsers($usersData);
+
+		//$view->setVariable('params', $params);
+		//return $view;
+
+		/*******************************************************************/
+		/**************************下面操作是个人学习************************/
+		/*******************************************************************/
+		/*  一个一个的取值  */
+		/*$params['title'] = $request->getQuery('title','default value');
+		$params['content'] = $request->getQuery('content','default value');
+		$params['name'] = $request->getQuery('name','default value');
+		$params['sex'] = $request->getQuery('sex','default value');
+		$params['country'] = $request->getQuery('country','default value');
+		$params['nbateam'] = $request->getQuery('nbateam','default value'); */
+		//echo $request->getBasePath()."<br />";
+		//echo $request->getServer("REQUEST_URI","default value")."<br />";
+		//echo $request->getUri()."<br />";
+        //echo $request->getQuery("title","没有值")."<br />";
+        /* foreach($request->getQuery() as $key=>$value){
+        	echo $key."---".$value."<br />";
+        } */
+        /* foreach($request->getHeaders() as $key=>$value){
+		 echo $key."---".$value."<br />";
+		} */
+		//echo $request->getHeaders('headersKeys');
+		//var_dump($request);
 		//$arr = $this->getRequest()->getPost();
 		//$arr =  $this->params('title');
-		$request = $this->getRequest();
-		//$view->setVariable('params', $params);
-		//var_dump($request);
-		print_r($request);
-		//$view->setVariable('title', $this->params('title'));
-		//return $view;
+		//print_r((new Request())->getHeaders());
+		//die();
+	    /*******************************************************************/
+		/**************************上面操作是个人学习************************/
+		/*******************************************************************/
 	}
 
     /*

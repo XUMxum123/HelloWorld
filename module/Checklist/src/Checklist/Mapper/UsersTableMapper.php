@@ -94,6 +94,15 @@ class UsersTableMapper {
 		}
 		return $result;
 	}
+
+	public function xumsaveuUsers($data){
+		$action = $this->sql->insert();
+		$action->values($data);
+		$statement = $this->sql->prepareStatementForSqlObject($action);
+		$result = $statement->execute();
+		return $result;
+	}
+
 	public function deleteTask($id)
 	{
 		$delete = $this->sql->delete();
