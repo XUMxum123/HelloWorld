@@ -14,8 +14,12 @@
 	}
 });*/
 
+$(document).ready(function(){
 
- $(document).ready(function(){
+});
+
+$(document).ready(function(){
+	onFocusBlur();
     $("button.submit").click(function(){
     var $title = $("input[name='title']").val();
     var $content = $("input[name='content']").val();
@@ -32,16 +36,74 @@
         	 url: "xumadd" + '?title=' + $title + '&content=' + $content + '&name=' + $name
  	               + '&sex=' + $sex + '&country=' + $country + '&nbateamid=' + $nbateamid,
         success: function(){
-            alert("保存成功!");
+        	layer.msg('保存成功', {
+        		  icon: 1,
+        		  time: 1000
+        		}, function(){
+        		  setInterval("refer()",1000);
+        		});
          }
         });
     });
  });
 
- function postAjaxData(){
+var t = 3; // how time goto another page
+function refer(){
+  if(t==0){
+	 window.location.href = "/checklist/xumlist";
+  }
+  $("div#show").text("" + t + "秒后跳转到列表"); // 显示倒计时
+  t--;
+}
 
- }
+function onFocusBlur(){
+	 $(".title").focus(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == "请输入标题"){
+	         $(this).val("");
+	     }
+	 });
+	 $(".title").blur(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == ""){
+	         $(this).val("请输入标题");
+	     }
+	 });
 
+	 $(".content").focus(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == "请输入内容"){
+	         $(this).val("");
+	     }
+	 });
+	 $(".content").blur(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == ""){
+	         $(this).val("请输入内容");
+	     }
+	 });
+
+	 $(".name").focus(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == "请输入名字"){
+	         $(this).val("");
+	     }
+	 });
+	 $(".name").blur(function(){
+	     var $txt_value = $(this).val();
+	     if($txt_value == ""){
+	         $(this).val("请输入名字");
+	     }
+	 });
+}
+
+function showInfo($nbateamId){ //[normal way]
+	layer.open({
+		area: ['600px', '500px'],
+		  type: 2,
+		  content: 'xumnbateam2' + '?id=' + $nbateamId
+		});
+}
 
 /*--------------------------------------------------------------------*/
  /*
