@@ -50,7 +50,7 @@ class NbateamTableMapper {
 		return $resultset;
 	}
 
-	public function getTask($id)
+	public function getNbateam($id)
 	{
 		$select = $this->sql->select();
 		$select->where(array('id' => $id));

@@ -1,8 +1,8 @@
-<h1>xumadd method</h1>
+<h1>xumindex method</h1>
 <div id="main_content">
-新闻标题: <input type="text" name="title" class="title" value="" /><br />
-新闻内容: <input type="text" name="content" class="content" value="" /><br />
-你的名字: <input type="text" name="name" class="name" value="" /><br />
+新闻标题: <input type="text" name="title" class="title" value="请输入标题" /><br />
+新闻内容: <input type="text" name="content" class="content" value="请输入内容" /><br />
+你的名字: <input type="text" name="name" class="name" value="请输入名字" /><br />
 你的性别: <select class="sex">
            <?php foreach ($this->sexInfo as $sex) : ?>
             <option value="<?php echo $sex; ?>"
@@ -44,8 +44,9 @@
          </select><br />
 <button class="submit">提交</button>
 </div>
-<div>
+<div style="text-align: center;">
  <a href="<?php echo $this->url('task');?>">
      返回列表
  </a>
 </div>
+<div id="show" style="text-align: center;"></div>

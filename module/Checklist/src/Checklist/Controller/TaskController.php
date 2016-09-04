@@ -123,6 +123,41 @@ class TaskController extends AbstractActionController {
 		return $prefix.$uuid;
 	}
 
+
+	public function xumlistAction() {
+		// TODO Auto-generated ChecklistController::indexAction() default action
+
+		/* 		$function_name = "uuid";
+			$prefix = "xum";
+		$sub = "xyz";
+		$uuid_function = $this->getCommonFunction($function_name);
+		$result = $uuid_function($prefix,$sub); 'my'=>$result */
+		//var_dump($config = $this->getServiceLocator()->get('Config'));die();
+		$usersTableMapper = $this->getTableMapper('usersTableMapper');
+		return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
+	}
+
+	public function xumnbateam2Action(){ //[normal way]
+		$nbateamId = $this->getRequest()->getQuery('id','default value');
+		// 返回值是一维数组
+		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateam($nbateamId);
+		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
+	}
+    // why have two method xumnbateam or xumnbateam2, because get param way different,[view helper way] and [normal way]
+	public function xumnbateamAction(){ //[view helper way]
+		$nbateamId = $this->params('id');
+		// 返回值是一维数组
+		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateam($nbateamId);
+		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
+	}
+
+	public function xumnewsAction(){
+		//$nbateamId = $this->params('nbateamId');
+		//$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getTask($nbateamId);
+		//var_dump($nbateamInfo);
+		return new ViewModel ();
+	}
+
 	/*
 	 * add xumindex and xumadd method, in order to study multi-table operate
 	 * */
@@ -164,7 +199,7 @@ class TaskController extends AbstractActionController {
         $usersData['id'] = $usersId;
         $usersData['newsid'] = $newsId;
         $usersData['nbateamid'] = $request->getQuery('nbateamid','default value');
-        $usersData['name'] = $request->getQuery('name','default value');
+        $usersData['name'] = $request->getQuery('name','default value'); //目前name的值只支持英文和数字,不支持中文,后续会改动...
         $usersData['sex'] = $request->getQuery('sex','default value');
         $usersData['country'] = $request->getQuery('country','default value');
         $usersTableMapper->xumsaveuUsers($usersData);

@@ -11,8 +11,11 @@
      <th>Title</th>
      <th>Content</th>
      <th>LoadCompleted?</th>
-     <th> <p><a href="<?php echo $this->url('task', array(
-         'action'=>'add'));?>">Add new item</a></p></th>
+     <th>
+       <p>
+          <a href="<?php echo $this->url('task', array('action'=>'add'));?>">Add new item</a>
+       </p>
+     </th>
  </tr>
  <?php foreach ($tasks as $task): ?>
  <tr>
@@ -30,9 +33,3 @@
  </tr>
  <?php endforeach; ?>
  </table>
-
- <div>
-  <a href="<?php echo $this->url('task',array('action'=>'xumindex'));?>">
-     增加我的信息(测试用)
- </a>
- </div>

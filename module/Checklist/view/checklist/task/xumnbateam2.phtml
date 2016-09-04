@@ -1,0 +1,17 @@
+<h1>xumnbateam2Info</h1>
+<div class="nbateam">
+    <table>
+      <tr>
+        <td>球队名字</td>
+        <td><?php echo $this->escapeHtml($nbateamInfo->getName());?></td>
+      </tr>
+      <tr>
+        <td>球队队徽</td>
+        <td><img src="<?php echo $this->escapeHtml($nbateamInfo->getLogo());?>" style="height:50px;" /></td>
+      </tr>
+      <tr>
+        <td>球队分区</td>
+        <td><?php echo $this->escapeHtml($nbateamInfo->getPartition());?></td>
+      </tr>
+    </table>
+</div>
