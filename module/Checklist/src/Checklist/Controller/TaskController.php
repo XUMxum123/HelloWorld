@@ -171,16 +171,26 @@ class TaskController extends AbstractActionController {
 		$view->setVariable('nbateamInfo', $nbateamInfo);
 		$sexInfo = array("boy","girl");
 		$countryInfo = array("America","China","France","German");
-		$init_sex = "boy";
+		$init_sex = "boy"; // default value
 		$view->setVariable('sexInfo', $sexInfo);
 		$view->setVariable('init_sex', $init_sex);
-		$init_country = "China";
+		$init_country = "China"; // default value
 		$view->setVariable('countryInfo', $countryInfo);
 		$view->setVariable('init_country', $init_country);
-		$init_nbateam = "骑士";
+		$init_nbateam = "骑士"; // default value
 		$view->setVariable('init_nbateam', $init_nbateam);
 		$view->setTemplate('checklist/task/xumindex.phtml');
 		return $view;
+	}
+
+	public function xumeditAction(){
+		$usersId = $this->params('id');
+		return new ViewModel (array("usersId"=>$usersId));
+	}
+
+	public function xumdeleteAction(){
+		$usersId = $this->params('id');
+		return new ViewModel (array("usersId"=>$usersId));
 	}
 
 	public function xumaddAction(){

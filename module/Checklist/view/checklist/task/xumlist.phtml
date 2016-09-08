@@ -30,13 +30,13 @@
      </td>
      <td>
      <a href="<?php echo $this->url('task',
-             array('action'=>'xumnews', 'id' => $user->getNewsid()));?>">查看喜欢的球队信息</a>
+             array('action'=>'xumnews', 'id' => $user->getNewsid()));?>">查看发出的新闻信息</a>
      </td>
      <td>
-        <!--  <a href="<?php //echo $this->url('task',
-             //array('action'=>'delete', 'id' => $user->getId()));?>">[Delete]</a>||
-         <a href="<?php //echo $this->url('task',
-             //array('action'=>'edit', 'id' => $user->getId()));?>">[Edit]</a> -->
+         <a href="<?php echo $this->url('task',
+             array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete]</a>||
+         <a href="<?php echo $this->url('task',
+             array('action'=>'xumedit', 'id' => $user->getId()));?>">[Edit]</a>
      </td>
  </tr>
  <?php endforeach; ?>
