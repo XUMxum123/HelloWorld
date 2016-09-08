@@ -25,7 +25,7 @@ $(document).ready(function(){
     var $content = $("input[name='content']").val();
     var $name = $("input[name='name']").val();
     var $sex = $("select.sex option:selected").val();  // var $sex = $('select.sex option:selected').text();
-    var $country = $("select[name='country'] option[selected]").val(); // var $country = $("select[name='country'] option[selected]").text();
+    var $country = $("select.country").find("option:selected").val(); // var $country = $("select[name='country'] option[selected]").text();
     var $nbateamid = $("select.nbateam").find("option:selected").val(); //var $nbateam = $("select.nbateam").find("option:selected").text();
 /*    var $url = "xumadd?title=" + $title + "&content=" + $content;
         $url += "&name=" + $name + "&sex=" + $sex;
