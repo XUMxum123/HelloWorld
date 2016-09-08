@@ -151,11 +151,12 @@ class TaskController extends AbstractActionController {
 		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
 	}
 
+	// obtain the parameter by [view helper way]
 	public function xumnewsAction(){
-		//$nbateamId = $this->params('nbateamId');
-		//$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getTask($nbateamId);
-		//var_dump($nbateamInfo);
-		return new ViewModel ();
+		$newsId = $this->params('id');
+		$newsInfo = $this->getTableMapper('newsTableMapper')->getTask($newsId);
+        //var_dump($newsInfo);
+		return new ViewModel (array('newsInfo' => $newsInfo));
 	}
 
 	/*
