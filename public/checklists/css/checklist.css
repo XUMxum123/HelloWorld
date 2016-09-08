@@ -13,6 +13,9 @@ h1 {text-align: center;}
 
 div#main_content { text-align: center; }
 
-div.nbateam {text-align: center; font-size: 25px;}
-div.nbateam table {margin: 0 auto; border: 3px #f00 solid;}
+div.nbateam table th,div.news table th {border: 2px solid #0ff;}
+div.nbateam,div.news {text-align: center; font-size: 25px;}
+div.nbateam table,div.news table {margin: 0 auto; border: 3px #f00 solid;}
 div.nbateam tr, div.nbateam td {border: 1px #f00 solid;}
+
+div.news tr,div.news td {border: 2px solid #0ff;}
