@@ -134,6 +134,9 @@ class TaskController extends AbstractActionController {
 		$result = $uuid_function($prefix,$sub); 'my'=>$result */
 		//var_dump($config = $this->getServiceLocator()->get('Config'));die();
 		$usersTableMapper = $this->getTableMapper('usersTableMapper');
+/* 		$paginator = $usersTableMapper->fetchAll(true);
+		var_dump($paginator);
+		die(); */
 		return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
 	}
 

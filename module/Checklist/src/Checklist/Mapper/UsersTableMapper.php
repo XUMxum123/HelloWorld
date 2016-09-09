@@ -3,7 +3,11 @@
 namespace Checklist\Mapper;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
+//use Zend\Paginator\Adapter\DbSelect;
+//use Zend\Db\ResultSet\ResultSet;
+use Zend\Paginator\Paginator;
 use Zend\Db\Adapter\Adapter;
+//use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Checklist\Model\UsersEntity;
 
@@ -35,8 +39,22 @@ class UsersTableMapper {
 		return $prefix.$uuid;
 	}
 
-	public function fetchAll()
+	public function fetchAll($paginated=false)
 	{
+		//if ($paginated) {
+
+			//$select = new Select($this->tableName);
+			//$resultSetPrototype = new ResultSet();
+/* 			$resultSetPrototype->setArrayObjectPrototype(new UsersEntity());
+			$paginatorAdapter = new DbSelect(
+					$select,
+					$this->dbAdapter,
+					$resultSetPrototype
+			);
+			$paginator = new Paginator($paginatorAdapter); */
+			//return $paginator;
+		//}
+
 		$select = $this->sql->select();
 		$select->order(array('id ASC')); // array('id ASC', 'title ASC')
 		// select * from news order by id asc,title asc
@@ -47,6 +65,10 @@ class UsersTableMapper {
 		$hydrator = new ClassMethods();
 		$resultset = new HydratingResultSet($hydrator, $entityPrototype);
 		$resultset->initialize($results);
+/* 		if($paginated){
+			$paginator = new Paginator($resultset);
+			return $paginator;
+		} */
 		return $resultset;
 	}
 
