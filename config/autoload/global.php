@@ -25,7 +25,7 @@ return array(
 					=> 'Zend\Db\Adapter\AdapterServiceFactory',
 		 ),
 	),
-	 'common_function' => array(
+/* 	 'common_function' => array(
             'function' => array(
                 'uuid' => function($prefix='',$sub){
                 	$chars = md5(uniqid(mt_rand(), true));
@@ -46,7 +46,7 @@ return array(
                 	return $prefix.$uuid;
              },
 	      ),
-     )
+     ) */
 );
 
 /*  another method to link mysql database
