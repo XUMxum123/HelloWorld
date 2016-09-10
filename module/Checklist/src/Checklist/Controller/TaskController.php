@@ -134,7 +134,13 @@ class TaskController extends AbstractActionController {
 		$result = $uuid_function($prefix,$sub); 'my'=>$result */
 		//var_dump($config = $this->getServiceLocator()->get('Config'));die();
 		$usersTableMapper = $this->getTableMapper('usersTableMapper');
-		return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
+		$paginator = $usersTableMapper->fetchAll(true);
+		$paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+		$paginator->setItemCountPerPage(2);
+		//var_dump($paginator);
+/* 		var_dump($this->getServiceLocator());*/
+		//die();
+		return new ViewModel (array('paginator' => $paginator));
 	}
 
 	public function xumnbateam2Action(){ //[normal way]
@@ -148,7 +154,9 @@ class TaskController extends AbstractActionController {
 		$nbateamId = $this->params('id');
 		// 返回值是一维数组
 		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateam($nbateamId);
-		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
+		var_dump($nbateamInfo);
+		die();
+		//return new ViewModel (array('nbateamInfo' => $nbateamInfo));
 	}
 
 	// obtain the parameter by [view helper way]
@@ -214,7 +222,7 @@ class TaskController extends AbstractActionController {
         $usersData['name'] = $request->getQuery('name','default value'); //目前name的值只支持英文和数字,不支持中文,后续会改动...
         $usersData['sex'] = $request->getQuery('sex','default value');
         $usersData['country'] = $request->getQuery('country','default value');
-        $usersTableMapper->xumsaveuUsers($usersData);
+        $usersTableMapper->xumsaveUsers($usersData);
 
 		//$view->setVariable('params', $params);
 		//return $view;
@@ -261,8 +269,8 @@ class TaskController extends AbstractActionController {
 	} */
 
 	/**
-	 * We can now call getNewsTableMapper() from within our controller whenever we need to interact with our model layer
-	 * example: $mapper = $this->getNewsTableMapper($tableName);
+	 * We can now call getTableMapper() from within our controller whenever we need to interact with our model layer
+	 * example: $mapper = $this->getTableMapper($tableName);
 	 */
 
 	public function getTableMapper($tableTableMapper){

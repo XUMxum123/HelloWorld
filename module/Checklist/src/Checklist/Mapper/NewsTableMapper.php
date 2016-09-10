@@ -4,22 +4,30 @@ namespace Checklist\Mapper;
 
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\Sql;
+//use Zend\Db\Sql\Sql;
 use Checklist\Model\NewsEntity;
 
 class NewsTableMapper {
 
+	protected $tableGateway;
 	protected $tableName;
-	protected $dbAdapter;
+
 	protected $sql;
 
 	public function __construct(Adapter $dbAdapter, $tableName = null)
 	{
-		$this->dbAdapter = $dbAdapter;
+		$this->tableName = $tableName;
+		$resultSet = new HydratingResultSet(new ClassMethods(), new NewsEntity());
+		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet);
+		$this->tableGateway = $tableGateway;
+
+
+/* 		$this->dbAdapter = $dbAdapter;
 		$this->sql = new Sql($dbAdapter);
 		$this->tableName = $tableName;
-		$this->sql->setTable($this->tableName);
+		$this->sql->setTable($this->tableName); */
 	}
 
 	/** Generates an UUID
@@ -97,10 +105,11 @@ class NewsTableMapper {
 	}
 
 	public function xumsaveNews($data){
-		$action = $this->sql->insert();
+		$result = $this->tableGateway->insert($data);
+/* 		$action = $this->sql->insert();
 		$action->values($data);
 		$statement = $this->sql->prepareStatementForSqlObject($action);
-		$result = $statement->execute();
+		$result = $statement->execute(); */
 		return $result;
 	}
 

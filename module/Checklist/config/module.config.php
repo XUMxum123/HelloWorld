@@ -8,6 +8,53 @@
  */
 
 return array(
+
+	'navigation' => array(
+		'default' => array(
+			array(
+				'label' => 'Home',
+				'route' => 'home',
+			),
+			array(
+				'label' => 'Task',
+				'route' => 'task',
+			   'action' => 'xumlist',
+/* 					'pages' => array(
+						array(
+								'label' => 'List',
+								'route' => 'task',
+								'action' => 'xumlist',
+						),
+						array(
+								'label' => 'Add',
+								'route' => 'task',
+								'action' => 'xumindex',
+						),
+						array(
+								'label' => 'Delete',
+								'route' => 'task',
+								'action' => 'xumdelete',
+						),
+						array(
+								'label' => 'Edit',
+								'route' => 'task',
+								'action' => 'xumedit',
+						),
+					), */
+			),
+			array(
+				'label' => 'Add',
+				'route' => 'task',
+			   'action' => 'xumindex',
+			),
+			array(
+				'label' => 'Edit',
+				'route' => 'task',
+			   'action' => 'xumedit',
+			),
+		),
+	),
+
     'router' => array(
 		'routes' => array(
 			'task' => array(
@@ -31,6 +78,7 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
     ),
     'translator' => array(
@@ -46,11 +94,6 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Checklist\Controller\Task' => 'Checklist\Controller\TaskController',
-        ),
-    ),
-    'service_manager' => array(
-        'factories' => array(
-            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
         ),
     ),
     'view_manager' => array(

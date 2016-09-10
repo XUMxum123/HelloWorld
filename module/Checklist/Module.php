@@ -11,6 +11,7 @@ namespace Checklist;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+
 use Checklist\Mapper\NewsTableMapper;
 use Checklist\Mapper\NbateamTableMapper;
 use Checklist\Mapper\UsersTableMapper;
@@ -53,22 +54,20 @@ class Module
      {
          return array(
              'factories' => array(
+             	 'dbAdapter'=>function($sm){
+             		return $sm->get('Zend\Db\Adapter\Adapter');
+             	 },
                  'newsTableMapper' => function ($sm) {
-                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                     $mapper = new NewsTableMapper($dbAdapter,"news");
-                     return $mapper;
+                 	return new NewsTableMapper($sm->get('dbAdapter'),"news");
                  },
                  'nbateamTableMapper' => function ($sm) {
-                 	$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                 	$mapper = new NbateamTableMapper($dbAdapter,"nbateam");
-                 	return $mapper;
+              	    return new NbateamTableMapper($sm->get('dbAdapter'),"nbateam");
                  },
                  'usersTableMapper' => function ($sm) {
-                 	$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                 	$mapper = new UsersTableMapper($dbAdapter,"users");
-                 	return $mapper;
+                 	return new UsersTableMapper($sm->get('dbAdapter'),"users");
                  },
              ),
+
          );
      }
 

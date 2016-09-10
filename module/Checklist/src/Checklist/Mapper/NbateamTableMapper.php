@@ -3,18 +3,26 @@
 namespace Checklist\Mapper;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Checklist\Model\NbateamEntity;
 
 class NbateamTableMapper {
 
+	protected $tableGateway;
 	protected $tableName;
-	protected $dbAdapter;
+
 	protected $sql;
 
 	public function __construct(Adapter $dbAdapter, $tableName = null)
 	{
+/* 		$this->tableName = $tableName;
+		$resultSet = new HydratingResultSet(new ClassMethods(), new NbateamEntity());
+		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet);
+		$this->tableGateway = $tableGateway; */
+
+
 		$this->dbAdapter = $dbAdapter;
 		$this->sql = new Sql($dbAdapter);
 		$this->tableName = $tableName;
@@ -64,7 +72,10 @@ class NbateamTableMapper {
 		$hydrator = new ClassMethods();
 		$task = new NbateamEntity();
 		$hydrator->hydrate($result, $task);
-
+/* 		$where = array('id' => $id);
+		$select = $this->tableGateway->getSql()->select();
+		$select->where($where);
+		$task = $this->tableGateway->selectWith($select); */
 		return $task;
 	}
 
