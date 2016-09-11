@@ -1,0 +1,7 @@
+<h1>xumkey method</h1>
+ <?php foreach ($this->users as $key=>$user): ?>
+   <div><?php echo $key."|".$this->escapeHtml($user->getId()); ?></div>
+   <div><?php echo $key."|".$this->escapeHtml($user->getName()); ?></div>
+   <div><?php echo $key."|".$this->escapeHtml($user->getSex()); ?></div>
+   <div><?php echo $key."|".$this->escapeHtml($user->getCountry()); ?></div>
+ <?php endforeach; ?>

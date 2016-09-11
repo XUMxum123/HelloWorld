@@ -6,8 +6,10 @@
   <th>内容</th>
  </tr>
  <tr>
+  <?php foreach ($this->newsInfo as $newsInfo): ?>
    <td><?php echo $this->escapeHtml($newsInfo->getTitle());?></td>
    <td><?php echo $this->escapeHtml($newsInfo->getContent());?></td>
+  <?php endforeach; ?>
  </tr>
 </table>
 </div>

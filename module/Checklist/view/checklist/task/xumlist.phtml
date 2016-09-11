@@ -6,6 +6,7 @@
 
  <table class="table">
  <tr>
+     <th>键值</th>
      <th>姓名</th>
      <th>性别</th>
      <th>国家</th>
@@ -19,6 +20,9 @@
  </tr>
  <?php foreach ($this->paginator as $user): ?>
  <tr>
+     <td>
+      <a href="<?php echo $this->url('task',
+             array('action'=>'xumkey', 'id' => $user->getId()));?>">查看(<?php echo $user->getId();?>)</a></td>
      <td><?php echo $this->escapeHtml($user->getName()); ?></td>
      <td><?php echo $this->escapeHtml($user->getSex()); ?></td>
      <td><?php echo $this->escapeHtml($user->getCountry()); ?></td>
@@ -34,9 +38,9 @@
      </td>
      <td>
          <a href="<?php echo $this->url('task',
-             array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete]</a>||
+             array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete这行记录]</a>||
          <a href="<?php echo $this->url('task',
-             array('action'=>'xumedit', 'id' => $user->getId()));?>">[Edit]</a>
+             array('action'=>'xumedit', 'id' => $user->getId()));?>">[Edit新闻]</a>
      </td>
  </tr>
  <?php endforeach; ?>

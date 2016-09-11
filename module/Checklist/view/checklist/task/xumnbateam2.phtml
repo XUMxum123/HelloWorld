@@ -1,6 +1,7 @@
 <h1>xumnbateam2Info</h1>
 <div class="nbateam">
     <table>
+    <?php foreach ($this->nbateamInfo as $nbateamInfo): ?>
       <tr>
         <td>球队名字</td>
         <td><?php echo $this->escapeHtml($nbateamInfo->getName());?></td>
@@ -13,5 +14,6 @@
         <td>球队分区</td>
         <td><?php echo $this->escapeHtml($nbateamInfo->getPartition());?></td>
       </tr>
+    <?php endforeach; ?>
     </table>
 </div>
