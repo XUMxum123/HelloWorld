@@ -9,12 +9,15 @@
 
 namespace Checklist;
 
+use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 use Checklist\Mapper\NewsTableMapper;
 use Checklist\Mapper\NbateamTableMapper;
-use Checklist\Mapper\UsersTableMapper;
+//use Checklist\Mapper\UsersTableMapper;
 
 /**
  * @author meng.xu
@@ -54,17 +57,23 @@ class Module
      {
          return array(
              'factories' => array(
-             	 'dbAdapter'=>function($sm){
+             	 'dbAdapter' => function($sm){
              		return $sm->get('Zend\Db\Adapter\Adapter');
              	 },
                  'newsTableMapper' => function ($sm) {
-                 	return new NewsTableMapper($sm->get('dbAdapter'),"news");
+                 	$resultSet = new HydratingResultSet(new ClassMethods(), new \Checklist\Model\NewsEntity());
+                 	$tableGateway = new TableGateway("news", $sm->get('dbAdapter'), null, $resultSet);
+                 	return new NewsTableMapper($tableGateway);
                  },
                  'nbateamTableMapper' => function ($sm) {
-              	    return new NbateamTableMapper($sm->get('dbAdapter'),"nbateam");
+                 	$resultSet = new HydratingResultSet(new ClassMethods(), new \Checklist\Model\NbateamEntity());
+                 	$tableGateway = new TableGateway("nbateam", $sm->get('dbAdapter'), null, $resultSet);
+              	    return new NbateamTableMapper($tableGateway);
                  },
                  'usersTableMapper' => function ($sm) {
-                 	return new UsersTableMapper($sm->get('dbAdapter'),"users");
+                 	$resultSet = new HydratingResultSet(new ClassMethods(), new \Checklist\Model\UsersEntity);
+                 	$tableGateway = new TableGateway("users", $sm->get('dbAdapter'), null, $resultSet);
+                 	return new \Checklist\Mapper\UsersTableMapper($tableGateway);
                  },
              ),
 
