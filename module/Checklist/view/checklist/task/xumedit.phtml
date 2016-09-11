@@ -1,3 +1,15 @@
 <h1>xumedit method</h1>
-<div>待开发</div>
-<div><?php echo $this->usersId; ?></div>
+<div style="text-align:center">
+ <?php foreach ($this->newsInfo as $newsInfo): ?>
+  <input type="hidden" name="newsId" value="<?php echo $this->escapeHtml($newsInfo->getId()); ?>" />
+   标题:&nbsp;<input type="text" name="title" value="<?php echo $this->escapeHtml($newsInfo->getTitle()); ?>" /><br />
+   内容:&nbsp;<input type="text" name="content" value="<?php echo $this->escapeHtml($newsInfo->getContent()); ?>" /><br />
+   <input type="button" class="saveEdit" value="保存" />
+ <?php endforeach; ?>
+ </div>
+ <div style="text-align: center;">
+ <a href="<?php echo $this->url('task',array('action'=>'xumlist'));?>">
+     返回列表
+ </a>
+</div>
+<div id="show" style="text-align: center;"></div>
