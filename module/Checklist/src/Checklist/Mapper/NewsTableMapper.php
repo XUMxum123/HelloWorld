@@ -126,6 +126,12 @@ class NewsTableMapper {
 		return $result;
 	}
 
+	public function xumsaveEditNews($data,$Id){
+		$where = array('id'=>$Id);
+		$result = $this->tableGateway->update($data,$where);
+		return $result;
+	}
+
 	public function deleteTask($id)
 	{
 		$delete = $this->sql->delete();

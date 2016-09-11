@@ -210,16 +210,30 @@ class TaskController extends AbstractActionController {
 	public function xumeditAction(){
 		$usersId = $this->params('id');
 		$usersTableMapper = $this->getTableMapper('usersTableMapper');
-		$userInfo = $usersTableMapper->getOneInfoById($usersId);
+		$userInfo = $usersTableMapper->getUserInfo($usersId);
+		foreach ($userInfo as $key=>$info){
+             $newsId = $info->getNewsid();
+		}
+		$newsInfo = $this->getTableMapper('newsTableMapper')->getNewsInfo($newsId);
+		//$userInfo->toArray();
 		//foreach ();
 		//$newsId = $userInfo->getNewsid();
-		var_dump($userInfo);
-		//return new ViewModel (array("usersId"=>$usersId));
+		//var_dump($newsInfo);
+		return new ViewModel (array("newsInfo"=>$newsInfo));
 	}
 
 	public function xumdeleteAction(){
 		$usersId = $this->params('id');
 		return new ViewModel (array("usersId"=>$usersId));
+	}
+
+	public function xumaddnewsAction(){
+		$request = $this->getRequest();
+		$newsTableMapper = $this->getTableMapper('newsTableMapper');
+		$newsId = $request->getQuery('newsId','default value');
+		$newsData['title'] = $request->getQuery('title','default value');
+		$newsData['content'] = $request->getQuery('content','default value');
+		$newsTableMapper->xumsaveEditNews($newsData,$newsId);
 	}
 
 	public function xumaddAction(){

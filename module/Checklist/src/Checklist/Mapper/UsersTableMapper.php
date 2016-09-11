@@ -123,7 +123,7 @@ class UsersTableMapper {
 	/*
 	 * return @object
 	 * */
-	public function getOneInfoById($id){
+/* 	public function getOneInfoById($id){
 		$select = $this->tableGateway->getSql()->select();
 		$where = array('id'=>$id);
 		$select->where($where);
@@ -131,7 +131,7 @@ class UsersTableMapper {
 		//$resultSet->getColumns();
 		//$result = $resultSet->toArray();
 		return $resultSet;
-	}
+	} */
 
 	/*
 	 * return @object
@@ -140,7 +140,7 @@ class UsersTableMapper {
 	{
 		$select = $this->tableGateway->getSql()->select();
 		$where = array('id'=>$id);
-		$select->where($where)->limit(1);
+		$select->where($where);
 		$resultSet = $this->tableGateway->selectWith($select);
 		return $resultSet;
 /* 		$select = $this->sql->select();
