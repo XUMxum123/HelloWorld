@@ -134,7 +134,6 @@ class TaskController extends AbstractActionController {
 		$result = $uuid_function($prefix,$sub); 'my'=>$result */
 		//var_dump($config = $this->getServiceLocator()->get('Config'));die();
 		$usersTableMapper = $this->getTableMapper('usersTableMapper');
-<<<<<<< HEAD
 		$paginator = $usersTableMapper->fetchAll(true);
 		$paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
 		$paginator->setItemCountPerPage(2);
@@ -142,12 +141,10 @@ class TaskController extends AbstractActionController {
 /* 		var_dump($this->getServiceLocator());*/
 		//die();
 		return new ViewModel (array('paginator' => $paginator));
-=======
 /* 		$paginator = $usersTableMapper->fetchAll(true);
 		var_dump($paginator);
 		die(); */
-		return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
+		//return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
 	}
 
 	public function xumnbateam2Action(){ //[normal way]

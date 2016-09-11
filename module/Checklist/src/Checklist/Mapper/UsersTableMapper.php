@@ -4,21 +4,18 @@ namespace Checklist\Mapper;
 
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
-<<<<<<< HEAD
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 //use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Paginator;
 use Zend\Db\Adapter\Adapter;
 //use Zend\Db\Sql\Sql;
-=======
 //use Zend\Paginator\Adapter\DbSelect;
 //use Zend\Db\ResultSet\ResultSet;
-use Zend\Paginator\Paginator;
-use Zend\Db\Adapter\Adapter;
+//use Zend\Paginator\Paginator;
+//use Zend\Db\Adapter\Adapter;
 //use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Sql;
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
+//use Zend\Db\Sql\Sql;
 use Checklist\Model\UsersEntity;
 
 class UsersTableMapper {
@@ -60,37 +57,31 @@ class UsersTableMapper {
 
 	public function fetchAll($paginated=false)
 	{
-<<<<<<< HEAD
 /* 		if ($paginated) {
 
 			$select = new Select($this->tableName);
 			$resultSetPrototype = new ResultSet();
 			$resultSetPrototype->setArrayObjectPrototype(new UsersEntity());
-=======
 		//if ($paginated) {
 
 			//$select = new Select($this->tableName);
 			//$resultSetPrototype = new ResultSet();
 /* 			$resultSetPrototype->setArrayObjectPrototype(new UsersEntity());
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
 			$paginatorAdapter = new DbSelect(
 					$select,
 					$this->dbAdapter,
 					$resultSetPrototype
 			);
-<<<<<<< HEAD
 			$paginator = new Paginator($paginatorAdapter);
 			return $paginator;
 		} */
 
 /* 		$select = $this->sql->select();
-=======
 			$paginator = new Paginator($paginatorAdapter); */
 			//return $paginator;
 		//}
 
-		$select = $this->sql->select();
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
+		/*$select = $this->sql->select();
 		$select->order(array('id ASC')); // array('id ASC', 'title ASC')
 		// select * from news order by id asc,title asc
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -99,17 +90,13 @@ class UsersTableMapper {
 		$entityPrototype = new UsersEntity();
 		$hydrator = new ClassMethods();
 		$resultset = new HydratingResultSet($hydrator, $entityPrototype);
-<<<<<<< HEAD
 
-		$resultset->initialize($results); */
-=======
 		$resultset->initialize($results);
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
+		$resultset->initialize($results);*/
 /* 		if($paginated){
 			$paginator = new Paginator($resultset);
 			return $paginator;
 		} */
-<<<<<<< HEAD
 		/*
 		 * for detail, you can see http://avnpc.com/pages/advanced-database-select-usage-in-zf2
 		 * */
@@ -131,10 +118,6 @@ class UsersTableMapper {
 			return $resultSet;
 			//throw new Exception\InvalidArgumentException('The table inside the provided Sql object must match the table of this TableGateway');
 		}
-
-=======
-		return $resultset;
->>>>>>> 5cfc0b5e7b9f8ef68248a59196a968828a26b78e
 	}
 
 	public function getTask($id)
