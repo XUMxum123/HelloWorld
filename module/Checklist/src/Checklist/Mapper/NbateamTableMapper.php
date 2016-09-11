@@ -15,18 +15,18 @@ class NbateamTableMapper {
 
 	protected $sql;
 
-	public function __construct(Adapter $dbAdapter, $tableName = null)
+	public function __construct($tableGateway)
 	{
 /* 		$this->tableName = $tableName;
 		$resultSet = new HydratingResultSet(new ClassMethods(), new NbateamEntity());
 		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet);
 		$this->tableGateway = $tableGateway; */
+		$this->tableGateway = $tableGateway;
 
-
-		$this->dbAdapter = $dbAdapter;
+/* 		$this->dbAdapter = $dbAdapter;
 		$this->sql = new Sql($dbAdapter);
 		$this->tableName = $tableName;
-		$this->sql->setTable($this->tableName);
+		$this->sql->setTable($this->tableName); */
 	}
 
 	/** Generates an UUID
@@ -45,7 +45,19 @@ class NbateamTableMapper {
 
 	public function fetchAll()
 	{
-		$select = $this->sql->select();
+		/*
+		 * for detail, you can see http://avnpc.com/pages/advanced-database-select-usage-in-zf2
+		* */
+		$where = array('id != ""');
+		//$order = array('id ASC','newsid DESC');
+		//$group = array();
+		$select = $this->tableGateway->getSql()->select();
+		$select->where($where);//->order($order);
+
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+
+/* 		$select = $this->sql->select();
 		$select->order(array('id ASC')); // array('id ASC', 'title ASC')
 		// select * from news order by id asc,title asc
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -55,12 +67,12 @@ class NbateamTableMapper {
 		$hydrator = new ClassMethods();
 		$resultset = new HydratingResultSet($hydrator, $entityPrototype);
 		$resultset->initialize($results);
-		return $resultset;
+		return $resultset; */
 	}
 
-	public function getNbateam($id)
+	public function getNbateamInfo($id)
 	{
-		$select = $this->sql->select();
+/* 		$select = $this->sql->select();
 		$select->where(array('id' => $id));
 
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -72,11 +84,14 @@ class NbateamTableMapper {
 		$hydrator = new ClassMethods();
 		$task = new NbateamEntity();
 		$hydrator->hydrate($result, $task);
-/* 		$where = array('id' => $id);
-		$select = $this->tableGateway->getSql()->select();
-		$select->where($where);
-		$task = $this->tableGateway->selectWith($select); */
 		return $task;
+		*/
+		$select = $this->tableGateway->getSql()->select();
+		$where = array('id'=>$id);
+		$select->where($where);
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+
 	}
 
 	public function saveTask(NbateamEntity $task)

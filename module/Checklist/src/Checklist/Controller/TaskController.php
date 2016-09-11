@@ -136,7 +136,7 @@ class TaskController extends AbstractActionController {
 		$usersTableMapper = $this->getTableMapper('usersTableMapper');
 		$paginator = $usersTableMapper->fetchAll(true);
 		$paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
-		$paginator->setItemCountPerPage(2);
+		$paginator->setItemCountPerPage(5);
 		//var_dump($paginator);
 /* 		var_dump($this->getServiceLocator());*/
 		//die();
@@ -147,27 +147,39 @@ class TaskController extends AbstractActionController {
 		//return new ViewModel (array('users' => $usersTableMapper->fetchAll()));
 	}
 
+	public function xumkeyAction(){
+		$usersId = $this->params('id');
+		$usersTableMapper = $this->getTableMapper('usersTableMapper');
+		$userInfo = $usersTableMapper->getUserInfo($usersId);
+		var_dump($usersId);
+		//var_dump($userInfo);
+		//die();
+		return new ViewModel (array('users' => $userInfo));
+	}
+
 	public function xumnbateam2Action(){ //[normal way]
 		$nbateamId = $this->getRequest()->getQuery('id','default value');
 		// 返回值是一维数组
-		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateam($nbateamId);
+		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateamInfo($nbateamId);
 		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
 	}
     // why have two method xumnbateam or xumnbateam2, because get param way different,[view helper way] and [normal way]
 	public function xumnbateamAction(){ //[view helper way]
 		$nbateamId = $this->params('id');
 		// 返回值是一维数组
-		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateam($nbateamId);
-		var_dump($nbateamInfo);
-		die();
-		//return new ViewModel (array('nbateamInfo' => $nbateamInfo));
+		$nbateamInfo = $this->getTableMapper('nbateamTableMapper')->getNbateamInfo($nbateamId);
+		//var_dump($nbateamInfo);
+		//die();
+		return new ViewModel (array('nbateamInfo' => $nbateamInfo));
 	}
 
 	// obtain the parameter by [view helper way]
 	public function xumnewsAction(){
 		$newsId = $this->params('id');
-		$newsInfo = $this->getTableMapper('newsTableMapper')->getTask($newsId);
+		$newsInfo = $this->getTableMapper('newsTableMapper')->getNewsInfo($newsId);
+		//var_dump($newsId);
         //var_dump($newsInfo);
+        //die();
 		return new ViewModel (array('newsInfo' => $newsInfo));
 	}
 
@@ -196,9 +208,13 @@ class TaskController extends AbstractActionController {
 	}
 
 	public function xumeditAction(){
-
 		$usersId = $this->params('id');
-		return new ViewModel (array("usersId"=>$usersId));
+		$usersTableMapper = $this->getTableMapper('usersTableMapper');
+		$userInfo = $usersTableMapper->getOneInfoById($usersId);
+		//foreach ();
+		//$newsId = $userInfo->getNewsid();
+		var_dump($userInfo);
+		//return new ViewModel (array("usersId"=>$usersId));
 	}
 
 	public function xumdeleteAction(){

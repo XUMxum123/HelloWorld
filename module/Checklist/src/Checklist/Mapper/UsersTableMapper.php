@@ -2,13 +2,13 @@
 
 namespace Checklist\Mapper;
 
-use Zend\Db\ResultSet\HydratingResultSet;
+//use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
-use Zend\Db\TableGateway\TableGateway;
+//use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 //use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Paginator;
-use Zend\Db\Adapter\Adapter;
+//use Zend\Db\Adapter\Adapter;
 //use Zend\Db\Sql\Sql;
 //use Zend\Paginator\Adapter\DbSelect;
 //use Zend\Db\ResultSet\ResultSet;
@@ -21,15 +21,15 @@ use Checklist\Model\UsersEntity;
 class UsersTableMapper {
 
 	protected $tableGateway;
-	protected $tableName;
+/* 	protected $tableName; */
 
 	protected $sql;
 
-	public function __construct(Adapter $dbAdapter, $tableName)
+	public function __construct($tableGateway)
 	{
-		$this->tableName = $tableName;
+/* 		$this->tableName = $tableName;
 		$resultSet = new HydratingResultSet(new ClassMethods(), new UsersEntity());
-		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet);
+		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet); */
 		$this->tableGateway = $tableGateway;
 
 /* 		$resultSetPrototype = new ResultSet();
@@ -120,9 +120,30 @@ class UsersTableMapper {
 		}
 	}
 
-	public function getTask($id)
+	/*
+	 * return @object
+	 * */
+	public function getOneInfoById($id){
+		$select = $this->tableGateway->getSql()->select();
+		$where = array('id'=>$id);
+		$select->where($where);
+		$resultSet = $this->tableGateway->selectWith($select);
+		//$resultSet->getColumns();
+		//$result = $resultSet->toArray();
+		return $resultSet;
+	}
+
+	/*
+	 * return @object
+	 * */
+	public function getUserInfo($id)
 	{
-		$select = $this->sql->select();
+		$select = $this->tableGateway->getSql()->select();
+		$where = array('id'=>$id);
+		$select->where($where)->limit(1);
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+/* 		$select = $this->sql->select();
 		$select->where(array('id' => $id));
 
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -135,7 +156,7 @@ class UsersTableMapper {
 		$task = new UsersEntity();
 		$hydrator->hydrate($result, $task);
 
-		return $task;
+		return $task; */
 	}
 
 	public function saveTask(UsersEntity $task)

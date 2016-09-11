@@ -4,9 +4,9 @@ namespace Checklist\Mapper;
 
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Adapter\Adapter;
-//use Zend\Db\Sql\Sql;
+//use Zend\Db\TableGateway\TableGateway;
+//use Zend\Db\Adapter\Adapter;
+//use Zend\Db\Sql\Select;
 use Checklist\Model\NewsEntity;
 
 class NewsTableMapper {
@@ -16,11 +16,11 @@ class NewsTableMapper {
 
 	protected $sql;
 
-	public function __construct(Adapter $dbAdapter, $tableName = null)
+	public function __construct($tableGateway)
 	{
-		$this->tableName = $tableName;
+/* 		$this->tableName = $tableName;
 		$resultSet = new HydratingResultSet(new ClassMethods(), new NewsEntity());
-		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet);
+		$tableGateway = new TableGateway($this->tableName, $dbAdapter, null, $resultSet); */
 		$this->tableGateway = $tableGateway;
 
 
@@ -46,7 +46,14 @@ class NewsTableMapper {
 
 	public function fetchAll()
 	{
-		$select = $this->sql->select();
+		$where = array('id != ""');
+		$order = array('id ASC');
+		//$group = array();
+		$select = $this->tableGateway->getSql()->select();
+		$select->where($where)->order($order);
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
+/* 		$select = $this->sql->select();
 		$select->order(array('id ASC')); // array('id ASC', 'title ASC')
         // select * from news order by id asc,title asc
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -56,12 +63,12 @@ class NewsTableMapper {
 		$hydrator = new ClassMethods();
 		$resultset = new HydratingResultSet($hydrator, $entityPrototype);
 		$resultset->initialize($results);
-		return $resultset;
+		return $resultset; */
 	}
 
-	public function getTask($id)
+	public function getNewsInfo($id)
 	{
-		$select = $this->sql->select();
+/* 		$select = $this->sql->select();
 		$select->where(array('id' => $id));
 
 		$statement = $this->sql->prepareStatementForSqlObject($select);
@@ -74,7 +81,13 @@ class NewsTableMapper {
 		$task = new NewsEntity();
 		$hydrator->hydrate($result, $task);
 
-		return $task;
+		return $task; */
+
+		$select = $this->tableGateway->getSql()->select();
+		$where = array('id'=>$id);
+		$select->where($where);
+		$resultSet = $this->tableGateway->selectWith($select);
+		return $resultSet;
 	}
 
 	public function saveTask(NewsEntity $task)
@@ -105,11 +118,11 @@ class NewsTableMapper {
 	}
 
 	public function xumsaveNews($data){
-		$result = $this->tableGateway->insert($data);
 /* 		$action = $this->sql->insert();
 		$action->values($data);
 		$statement = $this->sql->prepareStatementForSqlObject($action);
 		$result = $statement->execute(); */
+		$result = $this->tableGateway->insert($data);
 		return $result;
 	}
 
