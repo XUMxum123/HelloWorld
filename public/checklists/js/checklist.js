@@ -15,7 +15,24 @@
 });*/
 
 $(document).ready(function(){
-
+   $("input[type='button'].saveEdit").click(function(){
+       //alert("saveEdit");
+	   var $newsId = $("input[name='newsId']").val();
+	    var $title = $("input[name='title']").val();
+	    var $content = $("input[name='content']").val();
+	    $.ajax({
+	    	type: 'POST',
+	    	 url: "xumaddnews" + '?title=' + $title + '&content=' + $content + '&newsId=' + $newsId,
+	     success: function(){
+	         	layer.msg('保存成功', {
+	         		  icon: 1,
+	         		  time: 1000
+	         		}, function(){
+	         		  setInterval("refer()",1000);
+	         	 });
+	          }
+	    });
+   });
 });
 
 $(document).ready(function(){
