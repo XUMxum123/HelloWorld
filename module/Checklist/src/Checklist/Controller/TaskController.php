@@ -223,8 +223,15 @@ class TaskController extends AbstractActionController {
 	}
 
 	public function xumdeleteAction(){
-		$usersId = $this->params('id');
-		return new ViewModel (array("usersId"=>$usersId));
+		$usersId = $this->getRequest()->getQuery('usersId','default value');
+		$usersTableMapper = $this->getTableMapper('usersTableMapper');
+		$usersTableMapper->xumdeleteUsers($usersId);
+
+		$newsId = $this->getRequest()->getQuery('newsId','default value');
+		$newsTableMapper = $this->getTableMapper('newsTableMapper');
+		$newsTableMapper->xumdeleteNews($newsId);
+
+		//return new ViewModel (array("usersId"=>$usersId));
 	}
 
 	public function xumaddnewsAction(){

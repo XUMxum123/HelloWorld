@@ -195,6 +195,16 @@ class UsersTableMapper {
 		return $result;
 	}
 
+	public function xumdeleteUsers($id){
+		$where = array('id' => $id);
+		//$insert = $this->tableGateway->getSql()->insert();
+		$result = $this->tableGateway->delete($where);
+		/* 		$action->values($data);
+			$statement = $this->sql->prepareStatementForSqlObject($action);
+		$result = $statement->execute(); */
+		return $result;
+	}
+
 	public function deleteTask($id)
 	{
 		$delete = $this->sql->delete();

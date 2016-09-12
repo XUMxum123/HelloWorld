@@ -2,7 +2,7 @@
 
 namespace Checklist\Mapper;
 
-use Zend\Db\ResultSet\HydratingResultSet;
+//use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Stdlib\Hydrator\ClassMethods;
 //use Zend\Db\TableGateway\TableGateway;
 //use Zend\Db\Adapter\Adapter;
@@ -132,6 +132,16 @@ class NewsTableMapper {
 /* 		if($result == 0){
 			throw new \Exception('update error');
 		} */
+		return $result;
+	}
+
+	public function xumdeleteNews($id){
+		$where = array('id' => $id);
+		//$insert = $this->tableGateway->getSql()->insert();
+		$result = $this->tableGateway->delete($where);
+		/* 		$action->values($data);
+		 $statement = $this->sql->prepareStatementForSqlObject($action);
+		$result = $statement->execute(); */
 		return $result;
 	}
 
