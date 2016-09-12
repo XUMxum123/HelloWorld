@@ -20,14 +20,18 @@ $(document).ready(function(){
 	   var $newsId = $("input[name='newsId']").val();
 	    var $title = $("input[name='title']").val();
 	    var $content = $("input[name='content']").val();
+	   //var url =  "/checklist/xumaddnews" + '?title=' + $title + '&content=' + $content + '&newsId=' + $newsId;
+	   //alert(url);
+	   //window.location.href = url;
 	    $.ajax({
 	    	type: 'POST',
-	    	 url: "xumaddnews" + '?title=' + $title + '&content=' + $content + '&newsId=' + $newsId,
+	    	 url: "/checklist/xumaddnews" + '?title=' + $title + '&content=' + $content + '&newsId=' + $newsId,
 	     success: function(){
 	         	layer.msg('保存成功', {
 	         		  icon: 1,
 	         		  time: 1000
 	         		}, function(){
+	         			//alert("123");
 	         		  setInterval("refer()",1000);
 	         	 });
 	          }
@@ -122,6 +126,31 @@ function showInfo($nbateamId){ //[normal way]
 		});
 }
 
+function deleteRow($userId){ 
+	//alert("123");
+	layer.confirm('确定删除id='+$userId+'的这行记录?', {
+		time: 0,
+        btn: ['确定','取消'] //按钮      
+    }, function(){
+	    $.ajax({
+	    	type: 'POST',
+	    	 url: "/checklist/xumdelete" + '?id=' + $userId,
+	     success: function(){
+	         	layer.msg('保存成功', {
+	         		  icon: 1,
+	         		  time: 1000
+	         		}, function(){
+	         			//alert("123");
+	         		  setInterval("refer()",1000);
+	         	 });
+	          }
+	    });
+    	
+        //layer.msg('确定', {icon: 1, time:2000});
+    }, function(){
+        layer.msg('取消', {icon: 2, time:2000});
+    });
+}
 /*--------------------------------------------------------------------*/
  /*
   *
