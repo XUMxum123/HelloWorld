@@ -233,7 +233,10 @@ class TaskController extends AbstractActionController {
 		$newsId = $request->getQuery('newsId','default value');
 		$newsData['title'] = $request->getQuery('title','default value');
 		$newsData['content'] = $request->getQuery('content','default value');
-		$newsTableMapper->xumsaveEditNews($newsData,$newsId);
+		//var_dump($newsId);
+		//die();
+		$result = $newsTableMapper->xumsaveEditNews($newsData,$newsId);
+		//var_dump($newsData);
 	}
 
 	public function xumaddAction(){

@@ -126,9 +126,12 @@ class NewsTableMapper {
 		return $result;
 	}
 
-	public function xumsaveEditNews($data,$Id){
-		$where = array('id'=>$Id);
+	public function xumsaveEditNews($data,$id){
+		$where = array('id'=>$id);
 		$result = $this->tableGateway->update($data,$where);
+/* 		if($result == 0){
+			throw new \Exception('update error');
+		} */
 		return $result;
 	}
 

@@ -37,8 +37,9 @@
              array('action'=>'xumnews', 'id' => $user->getNewsid()));?>">查看发出的新闻信息</a>
      </td>
      <td>
-         <a href="<?php echo $this->url('task',
-             array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete这行记录]</a>||
+         <!--  <a href="<?php //echo $this->url('task',
+             //array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete这行记录]</a>||-->
+        <a href="#" onclick="deleteRow('<?php echo $user->getId()?>')">[Delete这行记录]</a>||
          <a href="<?php echo $this->url('task',
              array('action'=>'xumedit', 'id' => $user->getId()));?>">[Edit新闻]</a>
      </td>
