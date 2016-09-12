@@ -126,29 +126,48 @@ function showInfo($nbateamId){ //[normal way]
 		});
 }
 
-function deleteRow($userId){ 
-	//alert("123");
-	layer.confirm('确定删除id='+$userId+'的这行记录?', {
+$(document).ready(function(){
+	$target = $('tr.tabContent td a.usersId');
+	$target.each(function($index){
+		  this.onclick=function(){
+			  $usersId = $(this).attr('id');
+			  $newsId = $(this).parent().prev().find('a.newsId').attr('id');
+			  //alert($newsId);
+			  deleteRow($usersId,$newsId,$index);
+              //$(this).closest('.tabContent').remove();
+		      return false;
+		  };
+		 });
+});
+
+function deleteRow($usersId,$newsId,$index){
+	layer.confirm('确定删除id=' + $usersId + '的这行记录?', {
 		time: 0,
-        btn: ['确定','取消'] //按钮      
+        btn: ['确定','取消']
     }, function(){
 	    $.ajax({
 	    	type: 'POST',
-	    	 url: "/checklist/xumdelete" + '?id=' + $userId,
+	    	 url: "/checklist/xumdelete" + '?usersId=' + $usersId + '&newsId=' + $newsId,
 	     success: function(){
-	         	layer.msg('保存成功', {
+	         	layer.msg('删除成功', {
 	         		  icon: 1,
 	         		  time: 1000
 	         		}, function(){
+	         			$('tr.tabContent:eq('+$index+')').remove();
 	         			//alert("123");
-	         		  setInterval("refer()",1000);
+	         		  //setInterval("refer()",1000);
 	         	 });
 	          }
 	    });
-    	
         //layer.msg('确定', {icon: 1, time:2000});
     }, function(){
-        layer.msg('取消', {icon: 2, time:2000});
+    	//var inx = $('table.table tr td:last a').length;
+    	//alert(e);
+/*    	for(x in $(this)){
+    		document.write($(this)[x] +"\n");
+    	}*/
+        //alert($(this).index());
+    	layer.msg('取消', {icon: 2, time:1000});
     });
 }
 /*--------------------------------------------------------------------*/
