@@ -19,7 +19,7 @@
      </th>
  </tr>
  <?php foreach ($this->paginator as $user): ?>
- <tr>
+ <tr class="tabContent">
      <td>
       <a href="<?php echo $this->url('task',
              array('action'=>'xumkey', 'id' => $user->getId()));?>">查看(<?php echo $user->getId();?>)</a></td>
@@ -33,13 +33,14 @@
      ||<a href="#" onclick="showInfo('<?php echo $user->getNbateamid()?>')">[浮动]</a>
      </td>
      <td>
-     <a href="<?php echo $this->url('task',
+     <a class="newsId" id="<?php echo $user->getNewsid();?>"
+        href="<?php echo $this->url('task',
              array('action'=>'xumnews', 'id' => $user->getNewsid()));?>">查看发出的新闻信息</a>
      </td>
      <td>
-         <!--  <a href="<?php //echo $this->url('task',
+         <!--  <a href=" //echo $this->url('task', //onclick="deleteRow(' echo $user->getId()')"
              //array('action'=>'xumdelete', 'id' => $user->getId()));?>">[Delete这行记录]</a>||-->
-        <a href="#" onclick="deleteRow('<?php echo $user->getId()?>')">[Delete这行记录]</a>||
+         <a href="#" class="usersId" id="<?php echo $user->getId();?>">[Delete这行记录]</a>||
          <a href="<?php echo $this->url('task',
              array('action'=>'xumedit', 'id' => $user->getId()));?>">[Edit新闻]</a>
      </td>
