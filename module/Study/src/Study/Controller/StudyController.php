@@ -18,7 +18,10 @@ class StudyController extends AbstractActionController {
 	 */
 	public function indexAction() {
 		// TODO Auto-generated ChecklistController::indexAction() default action
-		return new ViewModel (array('xum' => "hello world"));
+		//return new ViewModel (array('xum' => "hello world"));
+		$view = new ViewModel();
+    	$view->setTemplate('study/study/admin/index.phtml');
+    	return $view;
 	}
 
 }

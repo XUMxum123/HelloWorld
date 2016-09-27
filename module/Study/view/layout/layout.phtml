@@ -11,12 +11,22 @@
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/studys/css/base.css')
+                        ->prependStylesheet($this->basePath() . '/studys/css/indexbody.css')
+                        ->prependStylesheet($this->basePath() . '/studys/css/metinfo.css')
+                        ->prependStylesheet($this->basePath() . '/studys/css/nav.css')
+                        ->prependStylesheet($this->basePath() . '/studys/css/newstyle.css')
+        ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                                       ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+                                      ->prependFile($this->basePath() . '/js/jquery.min.js')
+                                      ->prependFile($this->basePath() . '/studys/js/tab.js')
+                                      ->prependFile($this->basePath() . '/studys/js/metinfo.js')
+                                      ->prependFile($this->basePath() . '/studys/js/jQuery1.7.2.js')
+        ?>
 
     </head>
     <body>
